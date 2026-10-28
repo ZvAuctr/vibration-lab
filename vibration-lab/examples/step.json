@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "parameters": {
+    "mode": "arbitrary",
+    "m": 1,
+    "k": 100,
+    "zeta": 0,
+    "x0": 0,
+    "v0": 0,
+    "F": 4,
+    "Y": 0.02,
+    "r": 0.8,
+    "duration": 12,
+    "phi": 0,
+    "mu": 0.1,
+    "eccentricity": 0.02,
+    "wave": "square",
+    "harmonics": 9,
+    "load": "step",
+    "tau": 0.4,
+    "delay": 0.5,
+    "J": 0.4,
+    "response": "full",
+    "baseInput": "displacement",
+    "Ag": 1,
+    "csv": "0,0\n0.5,0\n1,4\n1.5,-2\n2,0\n12,0"
+  }
+}

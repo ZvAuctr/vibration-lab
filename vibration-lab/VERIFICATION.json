@@ -1,10 +1,13 @@
 {
-  "version": "1.0.0",
-  "runUTC": "2026-10-28T11:23:31.126Z",
+  "version": "1.0.1",
+  "runUTC": "2026-10-28T13:20:43.159Z",
   "node": "v24.18.0",
-  "suiteCount": 15,
-  "assertions": 33329,
-  "results": [
+  "coreSuites": 15,
+  "extendedSuites": 20,
+  "totalSuites": 35,
+  "assertions": 35105,
+  "status": "PASS",
+  "coreResults": [
     {
       "name": "All modes preserve absolute initial displacement and velocity",
       "status": "PASS",
@@ -13,12 +16,12 @@
     {
       "name": "Closed-form free response across all damping regimes and near criticality",
       "status": "PASS",
-      "ms": 8
+      "ms": 3
     },
     {
       "name": "Undamped period, velocity, acceleration and conserved energy",
       "status": "PASS",
-      "ms": 16
+      "ms": 9
     },
     {
       "name": "Exact and near resonance agree with independent undamped closed form",
@@ -32,7 +35,7 @@
     {
       "name": "Independent RK4 cross-check in absolute coordinates, deterministic parameter grid",
       "status": "PASS",
-      "ms": 106
+      "ms": 111
     },
     {
       "metric": "RK4 halved-step x errors (m)",
@@ -45,7 +48,7 @@
     {
       "name": "RK4 fourth-order convergence toward the engine",
       "status": "PASS",
-      "ms": 1
+      "ms": 0
     },
     {
       "name": "Finite-difference kinematics and equation residual in ground coordinates",
@@ -55,17 +58,17 @@
     {
       "name": "Trajectory recurrence agrees with direct matrix exponential",
       "status": "PASS",
-      "ms": 13
+      "ms": 15
     },
     {
       "name": "Energy balance including viscous loss, external work and moving-support work",
       "status": "PASS",
-      "ms": 56
+      "ms": 71
     },
     {
       "name": "Frequency response matches initialized harmonic particular solution",
       "status": "PASS",
-      "ms": 2
+      "ms": 3
     },
     {
       "name": "Base isolation threshold r=sqrt(2) and relative/absolute response distinction",
@@ -80,7 +83,7 @@
     {
       "name": "UI parameter extremes remain finite and agree with RK4 at high frequency",
       "status": "PASS",
-      "ms": 70
+      "ms": 83
     },
     {
       "name": "Validation rejects invalid input and executable strings",
@@ -90,8 +93,116 @@
     {
       "name": "Standalone build contains no external executable or asset dependency",
       "status": "PASS",
-      "ms": 2
+      "ms": 5
     }
   ],
-  "status": "PASS"
+  "extendedResults": [
+    {
+      "name": "v1.0.0 behavior preserved for all original experiments",
+      "status": "PASS",
+      "ms": 24
+    },
+    {
+      "name": "Phase and base coordinate conversion preserve absolute initial conditions",
+      "status": "PASS",
+      "ms": 1
+    },
+    {
+      "name": "Rotating unbalance force scales with speed squared and total supported mass",
+      "status": "PASS",
+      "ms": 1
+    },
+    {
+      "name": "Harmonic full and steady responses agree with independent RK4 and phase relations",
+      "status": "PASS",
+      "ms": 55
+    },
+    {
+      "name": "Transient component solves homogeneous equation; full equals steady plus transient",
+      "status": "PASS",
+      "ms": 1
+    },
+    {
+      "name": "Base displacement and acceleration equations verified independently",
+      "status": "PASS",
+      "ms": 8
+    },
+    {
+      "name": "Periodic coefficients, finite Fourier loads and RK4 cross-check",
+      "status": "PASS",
+      "ms": 45
+    },
+    {
+      "metric": "triangle Fourier displacement errors vs N=21",
+      "value": {
+        "N3": 0.0005729925955062914,
+        "N11": 0.000012372096968027435
+      }
+    },
+    {
+      "name": "Fourier truncation converges in damped response",
+      "status": "PASS",
+      "ms": 1
+    },
+    {
+      "name": "Step, finite ramp, rectangular and triangular pulse closed forms",
+      "status": "PASS",
+      "ms": 2
+    },
+    {
+      "name": "Ideal impulse has exact velocity and energy jump, including at t=0",
+      "status": "PASS",
+      "ms": 0
+    },
+    {
+      "name": "Half-sine pulse agrees with exact harmonic segment then free vibration",
+      "status": "PASS",
+      "ms": 10
+    },
+    {
+      "name": "Non-grid impulse and pulse events are retained in exported trajectory",
+      "status": "PASS",
+      "ms": 4
+    },
+    {
+      "name": "CSV piecewise-linear load matches independent Duhamel quadrature",
+      "status": "PASS",
+      "ms": 6
+    },
+    {
+      "name": "Linear chirp sampled load matches independent analytic-drive RK4",
+      "status": "PASS",
+      "ms": 94
+    },
+    {
+      "name": "Energy balance for periodic, rotating and arbitrary loads; moving support work",
+      "status": "PASS",
+      "ms": 284
+    },
+    {
+      "name": "Frequency transmission amplitude/phase and isolation threshold",
+      "status": "PASS",
+      "ms": 1
+    },
+    {
+      "name": "Logarithmic decrement identification recovers exact damping ratio and frequency",
+      "status": "PASS",
+      "ms": 0
+    },
+    {
+      "name": "Zero forcing, exact resonance and parameter extremes remain finite",
+      "status": "PASS",
+      "ms": 2
+    },
+    {
+      "name": "Input parser rejects code, duplicate times, malformed data and unsupported models",
+      "status": "PASS",
+      "ms": 0
+    },
+    {
+      "name": "Final file includes new engine, correct version and no slogan or chapter references",
+      "status": "PASS",
+      "ms": 1
+    }
+  ]
 }

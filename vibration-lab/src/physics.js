@@ -93,5 +93,5 @@
     const errors = [Math.abs(a.x - 0.08 * Math.cos(20)), Math.abs(b.x - 0.08 * 6 * Math.exp(-5)), Math.abs(c.x - expected)];
     return { pass: errors.every(e => e < 1e-9), maxError: Math.max(...errors), checks: 3 };
   }
-  return { DEFAULTS, LIMITS, validate, derived, system, frequency, selfCheck };
+  return { DEFAULTS, LIMITS, validate, derived, system, frequency, selfCheck, matrix: { expm, mv } };
 });

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#173c40">
-<meta name="description" content="可离线使用的单自由度振动交互实验：自由振动、阻尼、简谐受迫与基础激励。">
+<meta name="description" content="可离线使用的单自由度振动交互实验：自由振动、简谐力、旋转不平衡、基础运动、周期激励与任意时程。">
 <title>振动力学 · 单自由度交互实验室</title>
 <style>
 :root{--bg:#f4f5ef;--paper:#fffefa;--ink:#203b3d;--muted:#6a7f7d;--line:#dce4dc;--teal:#287f7d;--orange:#bf7937;--soft:#edf3ed;--blue:#6176a6}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;font-size:14px;line-height:1.65}button,input,select{font:inherit}button,a,input,select,summary{-webkit-tap-highlight-color:transparent}button,select,summary{cursor:pointer}button{transition:background .15s,border-color .15s;touch-action:manipulation}button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #d5944f;outline-offset:3px}button{color:var(--ink)}a{color:var(--teal)}button:disabled{opacity:.45;cursor:default}[hidden]{display:none!important}.topbar{max-width:1480px;margin:auto;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink);font-size:20px;font-weight:700;letter-spacing:2px}.brand small{display:block;font-size:9px;letter-spacing:2.5px;line-height:1;color:var(--muted);margin-top:4px}.brand-mark{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--ink);color:var(--paper);font-size:36px;line-height:1;font-family:Georgia}.top-links{display:flex;gap:25px;align-items:center}.offline{font-size:12px;color:var(--muted)}.offline i{display:inline-block;width:6px;height:6px;background:var(--teal);border-radius:50%;margin-right:5px}main{max-width:1480px;margin:auto;padding:0 40px}.intro{display:flex;justify-content:space-between;align-items:center;padding:36px 0 28px}.eyebrow{font-size:10px;font-weight:600;letter-spacing:1.8px;color:var(--muted)}h1{font-size:clamp(23px,2.7vw,37px);letter-spacing:-1px;line-height:1.4;margin:10px 0 7px;font-weight:600}h1 em{font-style:normal;color:var(--teal)}.intro p{margin:0;color:var(--muted)}.edition{font-family:Georgia,serif;font-size:48px;line-height:1.1;text-align:right;color:#a9b8ad}.edition span{font:14px "Microsoft YaHei",sans-serif;display:block;color:var(--ink);margin:6px 0}.edition small{display:block;font:10px "Microsoft YaHei",sans-serif;color:var(--muted)}.modes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:23px}.modes button{background:transparent;border:1px solid var(--line);text-align:left;border-radius:9px;padding:13px 18px;font-weight:600;font-size:14px}.modes button>span{font-family:Georgia,serif;color:var(--muted);margin-right:12px;font-weight:400}.modes small{display:block;margin-left:29px;margin-top:2px;font-weight:400;font-size:11px;color:var(--muted)}.modes button.active{background:var(--ink);border-color:var(--ink);color:white}.modes button.active span,.modes button.active small{color:#b5d2c8}.modes button:hover:not(.active){background:#eaf0e8}.workspace{display:grid;grid-template-columns:272px minmax(0,1fr);gap:20px;grid-template-areas:"controls experiment" "knowledge knowledge";align-items:start}.panel{background:var(--paper);border:1px solid var(--line);border-radius:12px}.panel-heading{display:flex;justify-content:space-between;align-items:center;gap:12px}h2{font-size:16px;margin:0;font-weight:650}h3{font-size:14px;margin:0}.muted{color:var(--muted);font-size:12px}.compact{margin:7px 0 15px}.text-btn{border:0;background:none;font-size:12px;padding:5px 0;color:var(--teal);min-height:32px}.text-btn:hover{text-decoration:underline}.controls{grid-area:controls;padding:19px}.field{margin-top:17px}.field-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.field-head label{font-size:12px;color:#4a6461}.number-wrap{display:flex;align-items:center;gap:5px}.number-wrap input{width:76px;border:1px solid var(--line);border-radius:5px;background:#f8faf4;padding:4px 5px;text-align:right;color:var(--ink);font-variant-numeric:tabular-nums;font-size:13px}.unit{color:var(--muted);font-size:10px;min-width:26px}.field input[type=range]{width:100%;margin:10px 0 0;accent-color:var(--teal);height:16px;cursor:pointer}.range-ends{display:flex;justify-content:space-between;color:var(--muted);font-size:9px}.divider{border-top:1px solid var(--line);margin:21px 0 15px}.select-label{display:block;font-size:12px;margin-bottom:7px}select{max-width:100%;background:#f8faf4;border:1px solid var(--line);border-radius:6px;color:var(--ink);padding:8px;font-size:12px}#preset{width:100%;margin-bottom:15px}.outline,.primary{padding:9px 13px;border-radius:7px;min-height:40px;font-size:12px;font-weight:600}.outline{background:transparent;border:1px solid var(--line)}.outline:hover{background:var(--soft)}.primary{border:1px solid var(--teal);background:var(--teal);color:white}.primary:hover{background:#206b69}.full{width:100%}.parameter-foot{font-size:10px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;margin-top:17px}.experiment{grid-area:experiment;min-width:0;display:grid;gap:20px}.stage-panel{overflow:hidden;padding:21px 23px 0}.pill{padding:4px 11px;color:var(--teal);background:#edf3ed;border-radius:20px;font-size:11px;white-space:nowrap}.stage-panel h2{font-size:19px;margin-top:4px}#model{width:100%;height:auto;max-height:245px;display:block;margin-top:12px;border-radius:6px}.svg-note{font-family:system-ui,sans-serif;font-size:12px;fill:#68847c}.svg-label{font-family:system-ui,sans-serif;font-size:13px;fill:#476963}.stage-caption{display:flex;align-items:center;justify-content:space-between;font-size:10px;color:var(--muted);gap:10px;margin-top:6px}.clock{font-variant-numeric:tabular-nums;font-size:12px}.clock b{color:var(--ink);font-weight:500}.transport{display:flex;align-items:center;gap:9px;margin:16px 0 9px}.transport .primary{min-width:118px}.speed-label{margin-left:auto;font-size:11px;display:flex;align-items:center;gap:5px;color:var(--muted)}.speed-label select{padding:5px;font-size:11px}.mobile-jump{display:none}.timeline input{width:100%;accent-color:var(--teal);cursor:pointer}.timeline>div{display:flex;justify-content:space-between;color:var(--muted);font-size:9px}.readouts{display:grid;grid-template-columns:repeat(4,1fr);margin:18px -23px 0;border-top:1px solid var(--line);background:#f7f9f3}.readouts>div{padding:14px 16px;border-right:1px solid var(--line)}.readouts>div:last-child{border-right:0}.readouts span{display:block;font-size:10px;color:var(--muted)}.readouts small{font-size:9px;margin-left:5px}.readouts strong{font-family:Consolas,monospace;font-size:20px;font-weight:500;letter-spacing:-.5px}.chart-panel{padding:18px 23px 9px}.chart-toolbar{display:flex;justify-content:space-between;gap:10px;align-items:center}.chart-tabs{display:flex;background:#eef2ea;border-radius:7px;padding:3px}.chart-tabs button{border:0;padding:6px 16px;background:transparent;color:var(--muted);border-radius:5px;font-size:12px}.chart-tabs button[aria-selected=true]{background:var(--paper);box-shadow:0 1px 3px #132d2520;color:var(--ink)}.chart-tabs button:disabled{opacity:.35}.chart-toolbar select{font-size:11px;padding:6px}.chart-header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:15px}.chart-header h3{font-size:12px}.legend{display:flex;gap:13px;font-size:10px;color:var(--muted);flex-wrap:wrap}.legend span:before{content:"";display:inline-block;width:14px;height:2px;background:var(--teal);vertical-align:middle;margin-right:5px}.legend .orange:before{background:var(--orange)}.legend .blue:before{background:var(--blue)}#chart{display:block;width:100%;height:232px;margin-top:10px}.chart-panel .compact{font-size:10px;margin-bottom:6px;min-height:17px}.chart-actions{display:flex;gap:19px;align-items:center;border-top:1px solid var(--line);padding-top:5px;flex-wrap:wrap}.chart-actions button{font-size:10px}#exportNote{font-size:10px;color:var(--muted)}.knowledge{grid-area:knowledge}.facts{padding:23px}.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:15px;margin:20px 0}.metrics>div{border-left:2px solid #dce8dc;padding-left:12px}.metrics span{display:block;font-size:10px;color:var(--muted)}.metrics strong{font-size:20px;font-family:Consolas,monospace;font-weight:500}.metrics small{font-size:10px;color:var(--muted);margin-left:4px}.equation{font:22px Georgia,"Times New Roman",serif;padding:20px;background:var(--soft);border-radius:8px;letter-spacing:1px;overflow-wrap:anywhere}.equation sub{font-size:12px}#coordinateNote{margin:10px 0 19px}.insight{border-left:3px solid var(--orange);padding-left:15px;margin-bottom:20px}.insight>span{color:var(--orange);font-size:10px;letter-spacing:1px}.insight h3{margin-top:3px}.insight p{font-size:12px;color:var(--muted);margin:4px 0}details{font-size:12px;border-top:1px solid var(--line);padding-top:12px;color:var(--muted)}summary{color:var(--ink);min-height:28px}details p{margin:7px 0}.theory-math{font-family:Georgia,serif;color:var(--ink);font-size:15px}footer{display:flex;justify-content:space-between;align-items:center;padding:22px 0 32px;gap:12px;color:var(--muted);font-size:10px}footer button{font-size:10px!important}dialog{border:1px solid var(--line);border-radius:14px;max-width:620px;width:calc(100% - 32px);padding:32px;color:var(--ink);background:var(--paper);max-height:85vh;box-shadow:0 20px 100px #0b2c3a30}dialog::backdrop{background:#173c4060;backdrop-filter:blur(3px)}dialog p,dialog li{font-size:13px;color:var(--muted)}dialog h2{font-size:23px;margin:8px 0 20px}dialog li{margin:9px 0}.close-dialog{position:absolute;top:9px;right:14px;font-size:28px;background:none;border:0;color:var(--muted);min-width:40px;min-height:40px}#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);border-radius:9px;background:var(--ink);color:white;padding:10px 20px;font-size:12px;box-shadow:0 3px 20px #173c4020;opacity:0;pointer-events:none;transition:opacity .2s;z-index:10;max-width:90vw}#toast.show{opacity:1}
@@ -17,29 +17,35 @@
 main > .modes{margin-top:24px}
 @media(max-width:760px){main > .modes{margin-top:16px}}
 
+/* 1.0.1 loading and response controls */
+.load-options{display:grid;gap:10px;margin-top:14px}.load-options label,#customLoad>label{font-size:12px;display:block}.load-options select{width:100%;margin-top:4px}.response-bar{display:flex;gap:9px;align-items:center;margin-top:15px;flex-wrap:wrap;font-size:11px}.component-label{display:flex;align-items:center;gap:5px;margin-left:auto}.component-label input{accent-color:var(--teal)}#responseNote{font-size:10px;margin:7px 0 0}#customLoad{margin-top:18px}textarea{width:100%;padding:8px;border:1px solid var(--line);border-radius:6px;background:#f8faf4;color:var(--ink);font:12px Consolas,monospace;resize:vertical;margin-top:7px}.custom-actions{display:flex;flex-wrap:wrap;gap:6px}.identify-fields{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}.identify-fields label{font-size:10px}.identify-fields input{display:block;width:100%;min-width:0;border:1px solid var(--line);padding:6px;border-radius:5px;font:13px Consolas,monospace;color:var(--ink);background:#f8faf4}.damping-tool{margin-top:13px}#dampingValues{color:var(--teal)}.chart-toolbar{flex-wrap:wrap}.chart-tabs{max-width:100%;overflow-x:auto;flex-shrink:0}.chart-tabs button{white-space:nowrap;padding-inline:11px}.chart-toolbar>select{max-width:180px}.modes button{min-width:0}.modes small{white-space:normal}.metrics{row-gap:15px}.response-bar select{max-width:220px}
+@media(max-width:760px){.chart-tabs{width:100%;flex-shrink:1}.chart-tabs button{flex:1;min-width:40px;padding:6px 9px}.chart-toolbar{gap:7px}.response-bar{gap:6px}.component-label{margin-left:0}.response-bar select{font-size:11px;padding:6px}#responseNote{font-size:10px}.modes small{font-size:9px}.number-wrap input{font-size:16px}.load-options select{font-size:14px}#freqKind{font-size:10px}.readouts strong{font-size:15px}}
+
 </style>
 </head>
 <body>
 <header class="topbar"><a class="brand" href="#"><span class="brand-mark">∿</span><span>振动力学</span></a><div class="top-links"><span class="offline"><i></i> 离线可用</span><button id="helpBtn" class="text-btn">使用说明</button></div></header>
 <main>
-<nav class="modes" aria-label="选择实验"><button data-mode="free"><span>01</span> 无阻尼自由振动<small>周期与能量</small></button><button data-mode="damped" class="active"><span>02</span> 有阻尼自由振动<small>衰减与阻尼状态</small></button><button data-mode="forced"><span>03</span> 简谐受迫振动<small>共振与拍振</small></button><button data-mode="base"><span>04</span> 基础简谐激励<small>传递与隔振</small></button></nav>
+<nav class="modes" aria-label="选择实验">
+<button data-mode="free"><span>01</span> 无阻尼自由振动<small>周期与能量</small></button><button data-mode="damped" class="active"><span>02</span> 有阻尼自由振动<small>阻尼状态与测量</small></button><button data-mode="forced"><span>03</span> 简谐力激励<small>全响应与稳态</small></button><button data-mode="unbalance"><span>04</span> 旋转不平衡<small>偏心质量与转速</small></button><button data-mode="base"><span>05</span> 基础运动激励<small>位移、加速度与隔振</small></button><button data-mode="periodic"><span>06</span> 周期激励<small>波形与谐波叠加</small></button><button data-mode="arbitrary"><span>07</span> 任意激励<small>阶跃、脉冲与自定义时程</small></button></nav>
 <div class="workspace">
-<aside class="panel controls" id="parameters"><div class="panel-heading"><h2>实验参数</h2><button id="resetParams" class="text-btn">恢复默认</button></div><p class="muted compact">修改参数后从初始状态重新开始。</p><div id="fields"></div><div class="divider"></div><label class="select-label" for="preset">课堂情景</label><select id="preset"><option value="">选择一个观察起点…</option><option value="period">质量加倍，周期怎样变化？</option><option value="critical">临界阻尼：恰好不再振荡</option><option value="over">过阻尼：回到平衡更慢吗？</option><option value="resonance">无阻尼共振：振幅持续增长</option><option value="beats">近频拍振：观察振幅包络</option><option value="isolation">基础隔振：频率比 r = 3</option></select><button id="compare" class="outline full">＋ 保留当前曲线作对照</button><button id="clearCompare" class="text-btn full" hidden>清除对照曲线</button><p id="compareInfo" class="muted compact"></p><div class="parameter-foot">初位移 x₀、初速度 v₀ 均相对于地面。<br>阻尼采用 c = 2ζ√(km)。</div></aside>
+<aside class="panel controls" id="parameters"><div class="panel-heading"><h2>实验参数</h2><button id="resetParams" class="text-btn">恢复默认</button></div><p class="muted compact">修改参数后从初始状态重新开始。</p><div id="loadOptions" class="load-options"></div><div id="fields"></div><div id="customLoad" hidden><label for="loadCSV">自定义时程：时间(s), 力(N)</label><textarea id="loadCSV" rows="6" spellcheck="false"></textarea><p class="muted compact">时间严格递增，从 0 开始；相邻点线性连接，末点以后保持末值。</p><div class="custom-actions"><button id="applyLoad" class="outline">应用时程</button><button id="importLoad" class="outline">导入 CSV</button><button id="sampleLoad" class="text-btn">下载示例</button><input id="loadFile" type="file" accept=".csv,.txt,text/plain,text/csv" hidden></div><p id="loadFeedback" role="status" class="muted"></p></div><div class="divider"></div><label class="select-label" for="preset">课堂情景</label><select id="preset"><option value="">选择一个观察起点…</option><option value="period">质量加倍，周期怎样变化？</option><option value="critical">临界阻尼：恰好不再振荡</option><option value="over">过阻尼：回到平衡更慢吗？</option><option value="resonance">无阻尼共振：振幅持续增长</option><option value="beats">近频拍振：观察振幅包络</option><option value="isolation">基础隔振：频率比 r = 3</option><option value="rotor">旋转不平衡：转速加倍</option><option value="harmonicResonance">方波的第三阶谐波共振</option><option value="stepLoad">阶跃荷载：动力放大</option><option value="pulseLoad">半正弦脉冲</option><option value="impulseLoad">瞬时冲量</option><option value="custom">自定义分段时程</option></select><button id="compare" class="outline full">＋ 保留当前曲线作对照</button><button id="clearCompare" class="text-btn full" hidden>清除对照曲线</button><p id="compareInfo" class="muted compact"></p><div class="parameter-foot">初位移 x₀、初速度 v₀ 均相对于地面。<br>阻尼采用 c = 2ζ√(km)。</div></aside>
 <section class="experiment" aria-label="动画与测量">
 <div class="panel stage-panel"><div class="panel-heading"><div><div class="eyebrow" id="experimentId">实验 02</div><h2 id="experimentTitle">有阻尼自由振动</h2></div><span class="pill" id="regime">欠阻尼</span></div>
-<svg id="model" viewBox="0 0 800 230" role="img" aria-label="弹簧质量阻尼器的运动示意图；精确位移见下方读数"><defs><pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse"><path d="M25 0H0V25" fill="none" stroke="#e4eae7" stroke-width="0.8"/></pattern><marker id="arrow" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto-start-reverse"><path d="M0 0L6 3L0 6" fill="none" stroke="#c37b39" stroke-width="1.5"/></marker></defs><rect x="0" y="0" width="800" height="230" fill="url(#grid)"/><line x1="470" x2="470" y1="22" y2="193" stroke="#aabdb8" stroke-dasharray="5 6"/><text x="482" y="29" class="svg-note">静平衡 x = 0</text><g id="baseGroup"><rect x="100" y="42" width="18" height="139" rx="3" fill="#8da6a0"/><path d="M118 175H690" stroke="#8da6a0" stroke-width="3"/><text x="80" y="211" class="svg-note" id="baseLabel">固定支座</text></g><path id="spring" fill="none" stroke="#286f72" stroke-width="4" stroke-linejoin="round"/><text x="244" y="67" class="svg-label">弹簧 k</text><g id="damperGroup"><path id="damper" fill="none" stroke="#77928a" stroke-width="3"/><text x="244" y="150" class="svg-label">阻尼 c</text></g><g id="mass"><rect x="420" y="65" width="100" height="99" rx="13" fill="#173c40"/><rect x="431" y="76" width="78" height="4" rx="2" fill="#4a7776"/><text x="470" y="124" text-anchor="middle" fill="white" font-size="25" font-family="Georgia,serif">m</text><circle cx="440" cy="173" r="7" fill="#537770"/><circle cx="500" cy="173" r="7" fill="#537770"/></g><path id="forceArrow" stroke="#c37b39" stroke-width="3" marker-end="url(#arrow)"/><text id="forceLabel" x="615" y="90" class="svg-label">F(t)</text><path d="M425 207H550" stroke="#c37b39" stroke-width="1.5" marker-end="url(#arrow)"/><text x="563" y="212" class="svg-note">x 正向</text></svg>
+<div id="responseBar" class="response-bar"><label for="response">显示响应</label><select id="response"><option value="full">全响应（含初始条件）</option><option value="steady">稳态响应</option></select><label class="component-label"><input id="components" type="checkbox"> 叠加稳态与瞬态</label></div><p id="responseNote" class="muted compact"></p>
+<svg id="model" viewBox="0 0 800 230" role="img" aria-label="弹簧质量阻尼器的运动示意图；精确位移见下方读数"><defs><pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse"><path d="M25 0H0V25" fill="none" stroke="#e4eae7" stroke-width="0.8"/></pattern><marker id="arrow" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto-start-reverse"><path d="M0 0L6 3L0 6" fill="none" stroke="#c37b39" stroke-width="1.5"/></marker></defs><rect x="0" y="0" width="800" height="230" fill="url(#grid)"/><line x1="470" x2="470" y1="22" y2="193" stroke="#aabdb8" stroke-dasharray="5 6"/><text x="482" y="29" class="svg-note">静平衡 x = 0</text><g id="baseGroup"><rect x="100" y="42" width="18" height="139" rx="3" fill="#8da6a0"/><path d="M118 175H690" stroke="#8da6a0" stroke-width="3"/><text x="80" y="211" class="svg-note" id="baseLabel">固定支座</text></g><path id="spring" fill="none" stroke="#286f72" stroke-width="4" stroke-linejoin="round"/><text x="244" y="67" class="svg-label">弹簧 k</text><g id="damperGroup"><path id="damper" fill="none" stroke="#77928a" stroke-width="3"/><text x="244" y="150" class="svg-label">阻尼 c</text></g><g id="mass"><rect x="420" y="65" width="100" height="99" rx="13" fill="#173c40"/><rect x="431" y="76" width="78" height="4" rx="2" fill="#4a7776"/><g id="rotor" hidden><circle cx="470" cy="115" r="27" fill="none" stroke="#86bdb5" stroke-width="2"/><g id="rotorArm"><path d="M470 115H493" stroke="#d6af6a" stroke-width="2"/><circle cx="493" cy="115" r="6" fill="#dfae62"/></g></g><text id="massText" x="470" y="124" text-anchor="middle" fill="white" font-size="25" font-family="Georgia,serif">m</text><circle cx="440" cy="173" r="7" fill="#537770"/><circle cx="500" cy="173" r="7" fill="#537770"/></g><path id="forceArrow" stroke="#c37b39" stroke-width="3" marker-end="url(#arrow)"/><text id="forceLabel" x="615" y="90" class="svg-label">F(t)</text><path d="M425 207H550" stroke="#c37b39" stroke-width="1.5" marker-end="url(#arrow)"/><text x="563" y="212" class="svg-note">x 正向</text></svg>
 <div class="stage-caption"><span id="scaleNote">运动示意 · 位移自动放大</span><span class="clock">t = <b id="timeValue">0.000</b> s</span></div>
 <div class="transport"><button id="play" class="primary">▶ 开始实验</button><button id="restart" class="outline" aria-label="回到零时刻">↺ 重来</button><button id="step" class="outline">单步</button><label class="speed-label">速度<select id="speed" aria-label="播放速度"><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label><a class="mobile-jump" href="#parameters">调参数 ↓</a></div>
 <div class="timeline"><input id="scrub" type="range" min="0" max="12" step="0.001" value="0" aria-label="实验时间"><div><span>0 s</span><span>拖动时间轴，逐帧观察</span><span id="endTime">12 s</span></div></div>
 <div class="readouts"><div><span>位移 x <small>m</small></span><strong id="readX">0.0800</strong></div><div><span>速度 v <small>m/s</small></span><strong id="readV">0.0000</strong></div><div><span>加速度 a <small>m/s²</small></span><strong id="readA">−8.0000</strong></div><div><span id="fourthLabel">机械能 E <small>J</small></span><strong id="readE">0.3200</strong></div></div></div>
-<div class="panel chart-panel"><div class="chart-toolbar"><div class="chart-tabs" role="tablist" aria-label="图表类型"><button role="tab" aria-selected="true" data-chart="time">时程</button><button role="tab" aria-selected="false" data-chart="phase">相图</button><button role="tab" aria-selected="false" data-chart="energy">能量</button><button role="tab" aria-selected="false" data-chart="frequency">幅频</button></div><select id="quantity" aria-label="时程物理量"><option value="x">位移 x / m</option><option value="v">速度 v / (m/s)</option><option value="a">加速度 a / (m/s²)</option></select></div><div class="chart-header"><h3 id="chartTitle">位移时程</h3><div id="legend" class="legend"></div></div><canvas id="chart" role="img" aria-label="当前实验曲线，精确数据可通过导出CSV读取"></canvas><p id="chartNote" class="muted compact"></p><div class="chart-actions"><button id="exportCSV" class="text-btn">↓ 导出数据 CSV</button><button id="exportConfig" class="text-btn">↓ 保存参数</button><button id="importConfig" class="text-btn">↑ 载入参数</button><input id="configFile" type="file" accept=".json,application/json" hidden><span id="exportNote" role="status"></span></div></div>
+<div class="panel chart-panel"><div class="chart-toolbar"><div class="chart-tabs" role="tablist" aria-label="图表类型"><button role="tab" aria-selected="true" data-chart="time">时程</button><button role="tab" aria-selected="false" data-chart="phase">相图</button><button role="tab" aria-selected="false" data-chart="energy">能量</button><button role="tab" aria-selected="false" data-chart="input">激励</button><button role="tab" aria-selected="false" data-chart="frequency">幅频</button><button role="tab" aria-selected="false" data-chart="phaseFrequency">相频</button></div><select id="quantity" aria-label="时程物理量"><option value="x">位移 x / m</option><option value="v">速度 v / (m/s)</option><option value="a">加速度 a / (m/s²)</option><option value="u">相对位移 u / m</option><option value="Ft">传递力 Fₜ / N</option></select><select id="freqKind" aria-label="频响类型" hidden><option value="displacement">位移响应</option><option value="transmission">力/位移传递率</option></select></div><div class="chart-header"><h3 id="chartTitle">位移时程</h3><div id="legend" class="legend"></div></div><canvas id="chart" role="img" aria-label="当前实验曲线，精确数据可通过导出CSV读取"></canvas><p id="chartNote" class="muted compact"></p><div class="chart-actions"><button id="exportCSV" class="text-btn">↓ 导出数据 CSV</button><button id="exportConfig" class="text-btn">↓ 保存参数</button><button id="importConfig" class="text-btn">↑ 载入参数</button><input id="configFile" type="file" accept=".json,application/json" hidden><span id="exportNote" role="status"></span></div></div>
 </section>
-<section class="knowledge"><div class="panel facts"><div class="panel-heading"><h2>系统特性与公式</h2></div><div id="metrics" class="metrics"></div><div class="equation" id="equation"></div><p id="coordinateNote" class="muted"></p><div class="insight"><span>观察任务</span><h3 id="taskTitle"></h3><p id="taskText"></p></div><details><summary>公式、假设与适用范围</summary><div id="theory"></div><p>线性弹簧、集中质量、黏性阻尼；位移从静平衡位置量起，重力静位移已消去。运动动画自动缩放，物理计算与图表不截断。频响曲线表示谐波特解；ζ &gt; 0 时瞬态消失后趋于该解。</p></details></div></section>
+<section class="knowledge"><div class="panel facts"><div class="panel-heading"><h2>系统特性与公式</h2></div><div id="metrics" class="metrics"></div><div class="equation" id="equation"></div><p id="coordinateNote" class="muted"></p><div class="insight"><span>观察任务</span><h3 id="taskTitle"></h3><p id="taskText"></p></div><details><summary>公式、假设与适用范围</summary><div id="theory"></div><p>线性弹簧、集中质量、黏性阻尼；位移从静平衡位置量起，重力静位移已消去。运动动画自动缩放，物理计算与图表不截断。频响曲线表示谐波特解；ζ &gt; 0 时瞬态消失后趋于该解。</p></details><details class="damping-tool"><summary>阻尼识别 · 对数减量法</summary><p>用于欠阻尼自由衰减；输入去除平衡偏移后的两个同向峰值幅值。</p><div class="identify-fields"><label>A₁ / m<input id="peak1" type="number" value="0.08" min="0" step="0.001"></label><label>A₂ / m<input id="peak2" type="number" value="0.048" min="0" step="0.001"></label><label>时间间隔 / s<input id="peakTime" type="number" value="0.63" min="0" step="0.01"></label><label>相隔周期数<input id="peakCycles" type="number" value="1" min="1" step="1"></label></div><button id="identify" class="outline">计算阻尼比</button><p id="identifyResult" role="status"></p><p id="dampingValues"></p></details></div></section>
 </div>
-<footer><span>振动力学 · v1.0.0 · MIT 开源</span><span id="checkStatus">正在检查计算内核…</span><button class="text-btn" id="aboutBtn">参考与版本说明 ↗</button></footer>
+<footer><span>振动力学 · v1.0.1 · MIT 开源</span><span id="checkStatus">正在检查计算内核…</span><button class="text-btn" id="aboutBtn">参考与版本说明 ↗</button></footer>
 </main>
-<dialog id="helpDialog"><button class="close-dialog" aria-label="关闭说明">×</button><h2>使用说明</h2><ol><li>选择上方实验，再调整质量、刚度和初始条件。</li><li>点击「开始实验」，或拖动时间轴查看任意时刻。</li><li>切换时程、相图、能量和幅频，连接现象与理论。</li><li>保留当前曲线，修改参数后比较同一物理量。</li><li>导出 CSV 进行计算，保存参数 JSON 可复现实验设置。</li></ol><p>本文件无需联网。电脑双击 HTML，用浏览器打开；手机请下载后使用支持本地 HTML 的浏览器打开。</p><p>单步前进 0.02 s；修改参数自动暂停并归零。图中淡线为整个实验的预览，深色线为已播放的部分。切换页面标签或进入后台时自动暂停。</p><p>网页可用键盘操作；图表精确值见下方读数或 CSV。建议在横屏下查看更多曲线细节。</p></dialog>
-<dialog id="aboutDialog"><button class="close-dialog" aria-label="关闭版本说明">×</button><h2>版本说明</h2><p>原创界面与计算实现。无外部字体、图表库、登录或网络请求。源代码按计算、界面和样式拆分，通过构建脚本生成这一个 HTML。</p><h3>参考的教学方法</h3><ul><li><a href="https://phet.colorado.edu/en/simulations/masses-and-springs" target="_blank" rel="noopener">PhET · Masses and Springs</a>：以可调参数、运动和能量帮助建立直觉。</li><li><a href="https://www.myphysicslab.com/springs/single-spring-en.html" target="_blank" rel="noopener">myPhysicsLab · Single Spring</a>：将弹簧模型、时程与相图联系起来。</li><li><a href="https://sd-iiith.vlabs.ac.in/exp/forced-vibration/procedure.html" target="_blank" rel="noopener">Virtual Labs · Forced Vibration</a>：用控制变量和频率比探究共振。</li><li><a href="https://www.sy.uestc.edu.cn/article/doi/10.12179/1672-4550.20240184?viewType=HTML" target="_blank" rel="noopener">《力学理论课程的互动虚拟实验平台建设与实践》</a>：参考按课程知识点组织实验、连接公式和现象的思路。</li></ul><p>仅借鉴教学方法，未复用上述平台的代码、图片或界面素材。详细验证方法与扩展说明见源码包 README。</p><p id="selfCheckDetail"></p></dialog>
+<dialog id="helpDialog"><button class="close-dialog" aria-label="关闭说明">×</button><h2>使用说明</h2><ol><li>选择上方实验，再调整质量、刚度和初始条件。</li><li>点击「开始实验」，或拖动时间轴查看任意时刻。</li><li>切换时程、相图、能量、激励、幅频和相频。简谐或周期实验可选择全响应、稳态并叠加分量。</li><li>保留当前曲线，修改参数后比较同一物理量。</li><li>导出 CSV 进行计算，保存参数 JSON 可复现实验设置。</li></ol><p>本文件无需联网。电脑双击 HTML，用浏览器打开；手机请下载后使用支持本地 HTML 的浏览器打开。</p><p>单步前进 0.02 s；修改参数自动暂停并归零。图中淡线为整个实验的预览，深色线为已播放的部分。切换页面标签或进入后台时自动暂停。</p><p>网页可用键盘操作；图表精确值见下方读数或 CSV。建议在横屏下查看更多曲线细节。</p></dialog>
+<dialog id="aboutDialog"><button class="close-dialog" aria-label="关闭版本说明">×</button><h2>版本说明</h2><p>原创界面与计算实现。无外部字体、图表库、登录或网络请求。源代码按计算、界面和样式拆分，通过构建脚本生成这一个 HTML。</p><h3>参考的教学方法</h3><ul><li><a href="https://phet.colorado.edu/en/simulations/masses-and-springs" target="_blank" rel="noopener">PhET · Masses and Springs</a>：以可调参数、运动和能量帮助建立直觉。</li><li><a href="https://www.myphysicslab.com/springs/single-spring-en.html" target="_blank" rel="noopener">myPhysicsLab · Single Spring</a>：将弹簧模型、时程与相图联系起来。</li><li><a href="https://sd-iiith.vlabs.ac.in/exp/forced-vibration/procedure.html" target="_blank" rel="noopener">Virtual Labs · Forced Vibration</a>：用控制变量和频率比探究共振。</li><li><a href="https://www.sy.uestc.edu.cn/article/doi/10.12179/1672-4550.20240184?viewType=HTML" target="_blank" rel="noopener">《力学理论课程的互动虚拟实验平台建设与实践》</a>：参考按课程知识点组织实验、连接公式和现象的思路。</li></ul><p>仅借鉴教学方法，未复用上述平台的代码、图片或界面素材。详细验证方法与扩展说明见源码包 README。1.0.1 增加旋转不平衡、周期激励、任意荷载、响应分解、相频及阻尼识别。适用线性、定常、黏性阻尼单自由度模型；非线性刚度、干摩擦、碰撞和随机振动统计不在本版范围内。</p><p id="selfCheckDetail"></p></dialog>
 <div id="toast" role="status" aria-live="polite"></div>
 <script>
 /* Vibration Lab — SI units throughout. No DOM or third-party dependencies. */
@@ -137,7 +143,217 @@ main > .modes{margin-top:24px}
     const errors = [Math.abs(a.x - 0.08 * Math.cos(20)), Math.abs(b.x - 0.08 * 6 * Math.exp(-5)), Math.abs(c.x - expected)];
     return { pass: errors.every(e => e < 1e-9), maxError: Math.max(...errors), checks: 3 };
   }
-  return { DEFAULTS, LIMITS, validate, derived, system, frequency, selfCheck };
+  return { DEFAULTS, LIMITS, validate, derived, system, frequency, selfCheck, matrix: { expm, mv } };
+});
+
+</script>
+<script>
+/* v1.0.1: linear SDOF loading, harmonic decomposition and exact linear-load steps.
+ * Harmonic response: augmented matrix exponentials, including exact resonance.
+ * Arbitrary response: exact propagation of each piecewise-linear load interval.
+ * No formulas supplied by the user are evaluated as code. */
+(function(root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory(require('./physics.js'));
+  else root.SDOF = factory(root.Vibration);
+})(typeof globalThis !== 'undefined' ? globalThis : this, function(Core) {
+  'use strict';
+  const VERSION = '1.0.1', { expm, mv } = Core.matrix;
+  const MODES = ['free', 'damped', 'forced', 'unbalance', 'base', 'periodic', 'arbitrary'];
+  const DEFAULTS = { ...Core.DEFAULTS, phi: 0, mu: .1, eccentricity: .02, wave: 'square', harmonics: 9, load: 'step', tau: .4, delay: .5, J: .4, response: 'full', baseInput: 'displacement', Ag: 1, csv: '0,0\n0.5,0\n1,4\n1.5,-2\n2,0\n12,0' };
+  const LIMITS = { ...Core.LIMITS, phi: [-180, 180], mu: [0, .5], eccentricity: [0, .1], harmonics: [1, 21], tau: [.02, 20], delay: [0, 20], J: [-5, 5], Ag: [0, 10] };
+  function parseLoad(text) {
+    if (typeof text !== 'string' || text.length > 150000) throw Error('时程文本过大');
+    const rows = text.trim().split(/\r?\n/).filter(s => s.trim() && !s.trim().startsWith('#'));
+    if (rows.length && /^[a-zA-Z\uFEFF]/.test(rows[0])) rows.shift();
+    if (rows.length < 2 || rows.length > 2000) throw Error('时程需要 2–2000 行时间、荷载数据');
+    const pairs = rows.map((row, i) => {
+      const values = row.trim().split(/[,;\s]+/);
+      if (values.length !== 2) throw Error('第 ' + (i + 1) + ' 行需要两列：时间(s)、力(N)');
+      const [t, F] = values.map(Number);
+      if (!Number.isFinite(t) || !Number.isFinite(F) || t < 0 || t > 60 || Math.abs(F) > 100000) throw Error('时程时间范围 0–60 s，力范围 ±100000 N');
+      return [t, F];
+    });
+    if (pairs[0][0] !== 0) throw Error('时程第一行时间须为 0');
+    for (let i = 1; i < pairs.length; i++) if (pairs[i][0] <= pairs[i - 1][0]) throw Error('时间必须严格递增，不可重复');
+    return pairs;
+  }
+  function validate(input) {
+    const p = { ...DEFAULTS, ...input };
+    if (!MODES.includes(p.mode)) throw Error('未知实验类型');
+    for (const [key, [lo, hi]] of Object.entries(LIMITS)) if (!Number.isFinite(p[key]) || p[key] < lo || p[key] > hi) throw Error(key + ' 超出范围 [' + lo + ', ' + hi + ']');
+    if (!Number.isInteger(p.harmonics)) throw Error('谐波最高阶数须为整数');
+    if (!['square', 'triangle', 'sawtooth', 'mix'].includes(p.wave)) throw Error('未知周期波形');
+    if (!['step', 'ramp', 'rectangle', 'triangle', 'halfSine', 'impulse', 'csv', 'chirp'].includes(p.load)) throw Error('未知时程类型');
+    if (!['full', 'steady'].includes(p.response)) throw Error('未知响应类型');
+    if (!['displacement', 'acceleration'].includes(p.baseInput)) throw Error('未知基础输入');
+    if (p.mode === 'free') p.zeta = 0;
+    if (p.mode === 'arbitrary' && p.load === 'csv') parseLoad(p.csv);
+    return p;
+  }
+  const derived = p => Core.derived(p);
+  function coefficients(p) {
+    const d = derived(p), ph = p.phi * Math.PI / 180, w = d.omega;
+    const result = [];
+    const addSin = (n, b) => { if (b) result.push({ n, w: n * w, a: b * Math.sin(n * ph), b: b * Math.cos(n * ph) }); };
+    if (p.mode === 'forced') addSin(1, p.F);
+    if (p.mode === 'unbalance') addSin(1, p.m * p.mu * p.eccentricity * w * w);
+    if (p.mode === 'base') {
+      if (p.baseInput === 'displacement') {
+        // Absolute equation m x'' + c x' + k x = k y + c y'.
+        result.push({ n: 1, w, a: p.k * p.Y * Math.sin(ph) + d.c * p.Y * w * Math.cos(ph), b: p.k * p.Y * Math.cos(ph) - d.c * p.Y * w * Math.sin(ph) });
+      } else addSin(1, -p.m * p.Ag); // Relative equation; ground acceleration is specified.
+    }
+    if (p.mode === 'periodic') for (let n = 1; n <= p.harmonics; n++) {
+      if (p.wave === 'square' && n % 2) addSin(n, p.F * 4 / (Math.PI * n));
+      if (p.wave === 'triangle' && n % 2) addSin(n, p.F * 8 / (Math.PI ** 2 * n ** 2) * (-1) ** ((n - 1) / 2));
+      if (p.wave === 'sawtooth') addSin(n, p.F * 2 / (Math.PI * n) * (-1) ** (n + 1));
+      if (p.wave === 'mix' && n <= 3) addSin(n, p.F * [0, 1, .35, .2][n]);
+    }
+    return result;
+  }
+  function frequency(input, r = input.r, kind = 'displacement') {
+    const p = validate(input), d = derived(p), z = p.zeta, den = Math.hypot(1 - r * r, 2 * z * r), num = Math.hypot(1, 2 * z * r);
+    const baseDisp = p.mode === 'base' && p.baseInput === 'displacement';
+    let numerator = kind === 'transmission' || baseDisp ? num : p.mode === 'unbalance' ? r * r : 1;
+    if (p.mode === 'base' && p.baseInput === 'acceleration' && kind !== 'transmission') numerator = 1;
+    const gain = den < 1e-14 ? Infinity : numerator / den;
+    const phase = den < 1e-14 ? null : Math.atan2(2 * z * r, 1 - r * r) - (kind === 'transmission' || baseDisp ? Math.atan2(2 * z * r, 1) : 0);
+    let factor = baseDisp ? p.Y : p.mode === 'unbalance' ? p.mu * p.eccentricity : p.mode === 'base' ? p.Ag / d.wn ** 2 : p.F / p.k;
+    return { gain, phase, amplitude: factor === 0 ? 0 : gain * factor, relativeGain: den < 1e-14 ? Infinity : r * r / den };
+  }
+  function harmonicPart(p, harmonic) {
+    const d = derived(p), { w, a, b } = harmonic;
+    const A = [0, 1, 0, 0, -p.k / p.m, -d.c / p.m, b / p.m, a / p.m, 0, 0, 0, w, 0, 0, -w, 0];
+    const D = p.k - p.m * w * w, C = d.c * w, norm = D * D + C * C;
+    const resonant = Math.abs(D) < 1e-12 * p.k && C === 0 && Math.hypot(a, b) > 0;
+    const ca = resonant || norm === 0 ? 0 : (D * a - C * b) / norm, cb = resonant || norm === 0 ? 0 : (C * a + D * b) / norm;
+    function steady(t) { const co = Math.cos(w * t), si = Math.sin(w * t); return [ca * co + cb * si, w * (-ca * si + cb * co)]; }
+    return { A, initial: [0, 0, 0, 1], resonant, steady };
+  }
+  function loadSegments(p) {
+    const end = 60, start = p.delay, stop = Math.min(end, start + p.tau), list = [];
+    const push = (t0, t1, f0, slope = 0) => { if (t1 > t0) list.push({ t0, t1, f0, slope }); };
+    if (p.load === 'csv') {
+      const rows = parseLoad(p.csv);
+      for (let i = 1; i < rows.length; i++) { const a = rows[i - 1], b = rows[i]; push(a[0], b[0], a[1], (b[1] - a[1]) / (b[0] - a[0])); }
+      push(rows.at(-1)[0], end, rows.at(-1)[1]);
+      return list;
+    }
+    push(0, start, 0);
+    if (p.load === 'step') push(start, end, p.F);
+    if (p.load === 'ramp') { push(start, stop, 0, p.F / p.tau); push(stop, end, p.F); }
+    if (p.load === 'rectangle') { push(start, stop, p.F); push(stop, end, 0); }
+    if (p.load === 'triangle') { const mid = start + p.tau / 2; push(start, mid, 0, 2 * p.F / p.tau); push(mid, stop, p.F, -2 * p.F / p.tau); push(stop, end, 0); }
+    if (p.load === 'halfSine') {
+      const N = 600;
+      for (let i = 0; i < N; i++) { const ta = start + i * p.tau / N, tb = start + (i + 1) * p.tau / N, fa = p.F * Math.sin(Math.PI * i / N), fb = p.F * Math.sin(Math.PI * (i + 1) / N); push(ta, tb, fa, (fb - fa) / (tb - ta)); }
+      push(stop, end, 0);
+    }
+    if (p.load === 'chirp') {
+      const d = derived(p), sweepEnd = Math.max(start, p.duration), n = Math.min(120000, Math.max(1000, Math.ceil((sweepEnd - start) * Math.max(d.omega, .1) * 400)));
+      const value = t => { const q = t - start; return p.F * Math.sin(d.omega * (q + q * q / (2 * Math.max(p.duration - start, .1)))); };
+      for (let i = 0; i < n; i++) { const ta = start + i * (sweepEnd - start) / n, tb = start + (i + 1) * (sweepEnd - start) / n; if(tb>ta)push(ta, tb, value(ta), (value(tb) - value(ta)) / (tb - ta)); }
+      push(sweepEnd, end, value(sweepEnd));
+    }
+    if (p.load === 'impulse') push(start, end, 0);
+    if (!list.length) push(0, end, 0);
+    return list;
+  }
+  function system(input) {
+    const p = validate(input), d = derived(p), base = p.mode === 'base', baseAcc = base && p.baseInput === 'acceleration', harmonics = coefficients(p), parts = harmonics.map(h => harmonicPart(p, h));
+    const arbitrary = p.mode === 'arbitrary', supportsSteady = !['free', 'damped', 'arbitrary'].includes(p.mode), hasSteady = supportsSteady && parts.every(h => !h.resonant);
+    let responseWarning = '';
+    if (p.response === 'steady' && !hasSteady) { p.response = 'full'; responseWarning = supportsSteady ? '存在无阻尼共振谐波，无有界稳态；已显示全响应。' : '该实验显示初始条件与荷载共同产生的全响应。'; }
+    const ph = p.phi * Math.PI / 180;
+    const ground = t => {
+      const w = d.omega, si = Math.sin(w * t + ph), co = Math.cos(w * t + ph);
+      if (!base) return { y: 0, yv: 0, ya: 0 };
+      if (!baseAcc) return { y: p.Y * si, yv: p.Y * w * co, ya: -p.Y * w * w * si };
+      // Acceleration input; integration constants fix y(0)=y'(0)=0.
+      if (w === 0) { const ag = p.Ag * Math.sin(ph); return { y: ag * t * t / 2, yv: ag * t, ya: ag }; }
+      return { y: p.Ag / w * (t * Math.cos(ph) - (Math.sin(w * t + ph) - Math.sin(ph)) / w), yv: p.Ag / w * (Math.cos(ph) - co), ya: p.Ag * si };
+    };
+    const g0 = ground(0), initial = [p.x0 - (baseAcc ? g0.y : 0), p.v0 - (baseAcc ? g0.yv : 0), 0, 0];
+    const H = [0, 1, 0, 0, -p.k / p.m, -d.c / p.m, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const intervals = arbitrary ? loadSegments(p) : [];
+    const P = [0, 1, 0, 0, -p.k / p.m, -d.c / p.m, 1 / p.m, 0, 0, 0, 0, 1, 0, 0, 0, 0];
+    if (arbitrary) {
+      let state = initial.slice();
+      for (const seg of intervals) {
+        if (p.load === 'impulse' && Math.abs(seg.t0 - p.delay) < 1e-12) state[1] += p.J / p.m;
+        seg.state = [state[0], state[1], seg.f0, seg.slope];
+        state = mv(expm(P, seg.t1 - seg.t0), seg.state);
+      }
+    }
+    function findSegment(t) {
+      let lo = 0, hi = intervals.length - 1;
+      while (lo < hi) { const mid = Math.ceil((lo + hi) / 2); if (intervals[mid].t0 <= t + 1e-13) lo = mid; else hi = mid - 1; }
+      return intervals[lo];
+    }
+    function rawLoad(t) {
+      if (arbitrary) { const seg = findSegment(t); return seg.f0 + seg.slope * (t - seg.t0); }
+      return harmonics.reduce((s, h) => s + h.a * Math.cos(h.w * t) + h.b * Math.sin(h.w * t), 0);
+    }
+    function steadyState(t) { return parts.reduce((s, h) => { const q = h.steady(t); return [s[0] + q[0], s[1] + q[1]]; }, [0, 0]); }
+    function unpack(t, full) {
+      const g = ground(t), load = rawLoad(t), ss = hasSteady ? steadyState(t) : null;
+      let q = p.response === 'steady' && ss ? ss[0] : full[0], qv = p.response === 'steady' && ss ? ss[1] : full[1];
+      const x = q + (baseAcc ? g.y : 0), v = qv + (baseAcc ? g.yv : 0), u = x - g.y, uv = v - g.yv;
+      const force = base ? 0 : load, a = (force - d.c * uv - p.k * u) / p.m, ua = a - g.ya;
+      const kinetic = .5 * p.m * v * v, potential = .5 * p.k * u * u, Ft = p.k * u + d.c * uv;
+      const sx = ss ? ss[0] + (baseAcc ? g.y : 0) : null, sv = ss ? ss[1] + (baseAcc ? g.yv : 0) : null;
+      const sa = ss ? ((base ? 0 : load) - d.c * (sv - g.yv) - p.k * (sx - g.y)) / p.m : null;
+      const fullA = (force - d.c * (full[1] + (baseAcc ? g.yv : 0) - g.yv) - p.k * (full[0] + (baseAcc ? g.y : 0) - g.y)) / p.m;
+      return { t, x, v, a, u, uv, ua, ...g, force, effectiveForce: load, Ft, kinetic, potential, energy: kinetic + potential, dampingPower: d.c * uv * uv,
+        inputPower: base ? -p.k * u * g.yv - d.c * uv * g.yv : force * v, steadyX: sx, steadyV: sv, steadyA: sa,
+        transientX: ss ? full[0] + (baseAcc ? g.y : 0) - sx : null, transientV: ss ? full[1] + (baseAcc ? g.yv : 0) - sv : null, transientA: ss ? fullA - sa : null };
+    }
+    function at(t) {
+      if (!Number.isFinite(t) || t < 0 || t > 60) throw Error('时间应在 0–60 s');
+      let state;
+      if (arbitrary) { const seg = findSegment(t); state = mv(expm(P, Math.max(0, t - seg.t0)), seg.state); }
+      else { state = mv(expm(H, t), initial); for (const h of parts) { const s = mv(expm(h.A, t), h.initial); state[0] += s[0]; state[1] += s[1]; } }
+      return unpack(t, state);
+    }
+    function trajectory(count = 2400) {
+      count = Math.max(2, Math.ceil(count));
+      const dt = p.duration / count, out = [], homogeneous = expm(H, dt), transitions = parts.map(h => expm(h.A, dt));
+      let hstate = initial.slice(), states = parts.map(h => h.initial.slice());
+      for (let i = 0; i <= count; i++) {
+        const t = Math.min(p.duration, i * dt);
+        if (arbitrary) out.push(at(t));
+        else {
+          if (i && i % 200 === 0) { hstate = mv(expm(H, t), initial); states = parts.map(h => mv(expm(h.A, t), h.initial)); }
+          const total = hstate.slice(); for (const s of states) { total[0] += s[0]; total[1] += s[1]; }
+          out.push(unpack(t, total)); hstate = mv(homogeneous, hstate); states = states.map((s, j) => mv(transitions[j], s));
+        }
+      }
+      if (arbitrary) {
+        const events = p.load === 'halfSine' ? [p.delay, p.delay + p.tau / 2, p.delay + p.tau] : p.load === 'chirp' ? [p.delay, p.duration] : intervals.map(s => s.t0);
+        for (const event of events) if (event >= 0 && event <= p.duration) {
+          out.push(at(event));
+          if (event > 1e-8 && ['step', 'rectangle', 'impulse'].includes(p.load)) out.push(at(event - 1e-9));
+        }
+        out.sort((a, b) => a.t - b.t);
+        return out.filter((point, i) => i === 0 || point.t - out[i - 1].t > 1e-13);
+      }
+      return out;
+    }
+    const damping = { delta: p.zeta > 0 && p.zeta < 1 ? 2 * Math.PI * p.zeta / Math.sqrt(1 - p.zeta ** 2) : null,
+      Td: d.wd ? 2 * Math.PI / d.wd : null, impulseJump: p.load === 'impulse' && arbitrary ? p.J / p.m : 0 };
+    return { p, d, at, trajectory, hasSteady, supportsSteady, responseWarning, harmonics, rawLoad, intervals, damping, ground };
+  }
+  function identify(a1, a2, timeBetween, cycles = 1) {
+    if (![a1, a2, timeBetween, cycles].every(Number.isFinite) || a1 <= 0 || a2 <= 0 || a2 >= a1 || timeBetween <= 0 || cycles < 1 || !Number.isInteger(cycles)) throw Error('输入同向衰减峰值 A₁>A₂>0、正时间间隔和整数周期数');
+    const delta = Math.log(a1 / a2) / cycles, zeta = delta / Math.hypot(2 * Math.PI, delta), wd = 2 * Math.PI * cycles / timeBetween;
+    return { delta, zeta, wd, wn: wd / Math.sqrt(1 - zeta * zeta) };
+  }
+  function selfCheck() {
+    const old = Core.selfCheck(), step = system({ mode: 'arbitrary', load: 'step', delay: 0, zeta: 0, x0: 0, v0: 0 }).at(.3);
+    const error = Math.abs(step.x - .04 * (1 - Math.cos(3)));
+    return { pass: old.pass && error < 1e-9, checks: old.checks + 1, maxError: Math.max(old.maxError, error) };
+  }
+  return { VERSION, MODES, DEFAULTS, LIMITS, validate, derived, system, frequency, coefficients, parseLoad, identify, selfCheck };
 });
 
 </script>
@@ -145,23 +361,34 @@ main > .modes{margin-top:24px}
 /* UI only. All physical values come from physics.js, independent of rendering FPS. */
 (function () {
   'use strict';
-  const V = Vibration, $ = id => document.getElementById(id);
+  const V = SDOF, $ = id => document.getElementById(id);
   const info = {
     free: ['实验 01', '无阻尼自由振动', 'm ẍ + k x = 0', '质量加倍后，周期会加倍吗？', '先保留当前曲线，再将质量 m 加倍。用时间轴比较相邻波峰：Tₙ = 2π√(m/k)，周期变为原来的 √2 倍。'],
     damped: ['实验 02', '有阻尼自由振动', 'm ẍ + c ẋ + k x = 0', '阻尼越大，回到平衡就一定越快吗？', '将 ζ 依次设为 0.08、1 和 2，并保留曲线比较。欠阻尼存在振荡；临界与过阻尼没有周期振荡。注意：有初速度时，非振荡响应也可能穿过零点一次。'],
     forced: ['实验 03', '简谐受迫振动', 'm ẍ + c ẋ + k x = F₀ sin(ωt)', '共振时，曲线会一直长大吗？', '选择“无阻尼共振”，观察增长的包络；再增大 ζ，比较稳态振幅。无阻尼非共振时自由振动分量不会消失，近频可出现拍振。'],
-    base: ['实验 04', '基础简谐激励', 'm ü + c u̇ + k u = −m ÿ', '什么时候运动能被隔离？', '选择基础隔振情景，切换幅频图。对于绝对位移传递率 X/Y，r > √2 时小于 1；高频区增大阻尼可能增加传递。u = x − y，绝对位移 x 与弹簧变形 u 不相同。']
+    unbalance: ['实验 04', '旋转不平衡质量激励', 'm ẍ + c ẋ + k x = mₑ e ω² sin(ωt + θ)', '转速加倍，激励力会变成几倍？', '总支承质量 m 包括不平衡质量 mₑ。保持质量比 μ 和偏心距 e，改变 r。激励力幅按 ω² 改变；高频位移幅趋向 μe。'],
+    periodic: ['实验 06', '周期激励', 'm ẍ + c ẋ + k x = Σ Fₙ sin(nωt + nθ)', '基频没有共振，高阶谐波会共振吗？', '选择方波并令 r = 1/3、ζ = 0。第三阶谐波位于固有频率，即使基频远离共振，也会产生持续增长。增大最高阶数比较傅里叶截断效果。'],
+    arbitrary: ['实验 07', '任意激励', 'm ẍ + c ẋ + k x = F(t)', '荷载停止以后，系统为什么还在振动？', '比较阶跃、矩形脉冲、半正弦脉冲和瞬时冲量。切换激励图观察输入，荷载撤去后系统以结束时的位移和速度继续自由振动。自定义 CSV 支持任意分段线性力时程。'],
+    base: ['实验 05', '基础运动激励', 'm ü + c u̇ + k u = −m ÿ', '什么时候运动能被隔离？', '选择基础隔振情景，切换幅频图。对于绝对位移传递率 X/Y，r > √2 时小于 1；高频区增大阻尼可能增加传递。u = x − y，绝对位移 x 与弹簧变形 u 不相同。']
   };
   const defs = {
     m: ['质量 m', 'kg', 0.1], k: ['刚度 k', 'N/m', 1], zeta: ['阻尼比 ζ', '—', 0.01],
-    x0: ['初位移 x₀', 'm', 0.005], v0: ['初速度 v₀', 'm/s', 0.05], F: ['力幅 F₀', 'N', 0.1], Y: ['基础幅 Y', 'm', 0.001], r: ['频率比 r', '—', 0.01], duration: ['观察时长', 's', 1]
+    x0: ['初位移 x₀', 'm', 0.005], v0: ['初速度 v₀', 'm/s', 0.05], F: ['力幅 F₀', 'N', 0.1], Y: ['基础幅 Y', 'm', 0.001], r: ['频率比 r', '—', 0.01], duration: ['观察时长', 's', 1], phi: ['激励初相位 θ', '°', 1], mu: ['质量比 μ=mₑ/m', '—', .01], eccentricity: ['偏心距 e', 'm', .001], harmonics: ['最高谐波阶数 N', '—', 1], tau: ['持续/上升时间 τ', 's', .01], delay: ['开始时间 t₀', 's', .05], J: ['冲量 J', 'N·s', .05], Ag: ['基础加速度幅 Aᵍ', 'm/s²', .1]
   };
-  let p = { ...V.DEFAULTS }, sys, points, visualPeak = .1, comparison = null, t = 0, running = false, last = 0, chartType = 'time', frame = 0, toastTimer;
+  let p = { ...V.DEFAULTS }, sys, points, visualPeak = .1, visualForcePeak = 1, comparison = null, t = 0, running = false, last = 0, chartType = 'time', frame = 0, toastTimer;
   const fmt = (n, digits = 4) => !Number.isFinite(n) ? (n === Infinity ? '∞' : '—') : Math.abs(n) > 9999 ? n.toExponential(2) : (Math.abs(n) < 0.5 * 10 ** -digits ? 0 : n).toFixed(digits);
   function notify(message) { $('toast').textContent = message; $('toast').classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => $('toast').classList.remove('show'), 3200); }
   function setRunning(value) { running = value; last = 0; $('play').textContent = value ? 'Ⅱ 暂停实验' : t >= p.duration ? '↺ 再做一次' : '▶ 开始实验'; }
   function buildFields() {
-    const keys = ['m', 'k', ...(p.mode === 'free' ? [] : ['zeta']), 'x0', 'v0', ...(p.mode === 'forced' ? ['F', 'r'] : p.mode === 'base' ? ['Y', 'r'] : []), 'duration'];
+    const harmonic = ['forced','unbalance','base','periodic'].includes(p.mode);
+    const keys = ['m','k', ...(p.mode === 'free' ? [] : ['zeta']), 'x0','v0',
+      ...(p.mode === 'forced' ? ['F','r','phi'] : p.mode === 'unbalance' ? ['mu','eccentricity','r','phi'] : p.mode === 'base' ? [p.baseInput === 'displacement' ? 'Y' : 'Ag','r','phi'] : p.mode === 'periodic' ? ['F','r','phi','harmonics'] : p.mode === 'arbitrary' ? [...(p.load === 'impulse' ? ['J'] : p.load === 'csv' ? [] : ['F']), ...(p.load === 'csv' ? [] : ['delay']), ...(['ramp','rectangle','triangle','halfSine'].includes(p.load) ? ['tau'] : []), ...(p.load === 'chirp' ? ['r'] : [])] : []), 'duration'];
+    const select = (id,label,options,value) => '<label for="'+id+'">'+label+'<select id="'+id+'">'+options.map(([v,text])=>'<option value="'+v+'" '+(v===value?'selected':'')+'>'+text+'</option>').join('')+'</select></label>';
+    $('loadOptions').innerHTML = p.mode === 'periodic' ? select('wave','周期波形',[['square','方波（零均值）'],['triangle','三角波'],['sawtooth','锯齿波'],['mix','三频叠加']],p.wave) : p.mode === 'arbitrary' ? select('load','荷载形式',[['step','阶跃力'],['ramp','有限上升时间斜坡'],['rectangle','矩形脉冲'],['triangle','三角脉冲'],['halfSine','半正弦脉冲'],['impulse','理想瞬时冲量'],['chirp','线性扫频力'],['csv','自定义 CSV 时程']],p.load) : p.mode === 'base' ? select('baseInput','基础输入',[['displacement','指定基础位移 y(t)'],['acceleration','指定基础加速度 ÿ(t)']],p.baseInput) : '';
+    for(const key of ['wave','load','baseInput']) if($(key)) $(key).addEventListener('change',e=>{p[key]=e.target.value;buildFields();rebuild();});
+    $('customLoad').hidden = !(p.mode === 'arbitrary' && p.load === 'csv');
+    $('loadCSV').value=p.csv;
+    $('responseBar').hidden = !harmonic;
     $('fields').innerHTML = keys.map(key => {
       const [label, unit, step] = defs[key], [min, max] = V.LIMITS[key];
       return `<div class="field"><div class="field-head"><label for="n-${key}">${label}</label><div class="number-wrap"><input id="n-${key}" type="number" min="${min}" max="${max}" step="${step}" value="${p[key]}" inputmode="decimal"><span class="unit">${unit}</span></div></div><input id="s-${key}" type="range" min="${min}" max="${max}" step="${step}" value="${p[key]}" aria-label="${label}滑块"><div class="range-ends"><span>${min}</span><span>${max}</span></div></div>`;
@@ -170,13 +397,13 @@ main > .modes{margin-top:24px}
       $('s-' + key).addEventListener('input', e => { p[key] = Number(e.target.value); $('n-' + key).value = p[key]; rebuild(); });
       $('n-' + key).addEventListener('input', e => {
         const n = Number(e.target.value), [lo, hi] = V.LIMITS[key];
-        if (e.target.value.trim() !== '' && Number.isFinite(n) && n >= lo && n <= hi) {
+        if (e.target.value.trim() !== '' && Number.isFinite(n) && n >= lo && n <= hi && (key !== 'harmonics' || Number.isInteger(n))) {
           p[key] = n; $('s-' + key).value = n; rebuild();
         }
       });
       $('n-' + key).addEventListener('change', e => {
         const n = Number(e.target.value), [lo, hi] = V.LIMITS[key];
-        if (e.target.value.trim() === '' || !Number.isFinite(n) || n < lo || n > hi) { e.target.value = p[key]; notify(`请输入 ${lo} 至 ${hi} 之间的数值`); return; }
+        if (e.target.value.trim() === '' || !Number.isFinite(n) || n < lo || n > hi || (key === 'harmonics' && !Number.isInteger(n))) { e.target.value = p[key]; notify(`请输入 ${lo} 至 ${hi} 之间的${key === 'harmonics' ? '整数' : '数值'}`); return; }
         if (p[key] !== n) { p[key] = n; $('s-' + key).value = n; rebuild(); }
       });
     }
@@ -185,24 +412,46 @@ main > .modes{margin-top:24px}
     setRunning(false); t = 0; sys = V.system(p); p = sys.p;
     // Aim for 100 samples per fastest oscillation; cap the display/export grid
     // at 24000 intervals. Direct readouts remain independent of this grid.
-    points = sys.trajectory(Math.min(24000, Math.max(1800, Math.ceil(p.duration * Math.max(sys.d.wn, sys.d.omega) * 16))));
+    points = sys.trajectory(Math.min(16000, Math.max(1800, Math.ceil(p.duration * Math.max(sys.d.wn, sys.d.omega * (p.mode === 'periodic' ? p.harmonics : 1)) * 16))));
     visualPeak = points.reduce((peak, a) => Math.max(peak, Math.abs(a.x)), Math.max(.04, p.mode === 'base' ? p.Y * 1.6 : 0));
+    visualForcePeak = points.reduce((peak, a) => Math.max(peak, Math.abs(a.force)), 1e-12);
     $('scrub').max = p.duration; $('scrub').value = 0; $('endTime').textContent = p.duration + ' s';
     document.querySelectorAll('[data-mode]').forEach(b => { b.classList.toggle('active', b.dataset.mode === p.mode); b.setAttribute('aria-pressed', b.dataset.mode === p.mode); });
     const data = info[p.mode]; $('experimentId').textContent = data[0]; $('experimentTitle').textContent = data[1]; $('equation').textContent = data[2]; $('taskTitle').textContent = data[3]; $('taskText').textContent = data[4];
     $('regime').textContent = sys.d.regime;
-    const base = p.mode === 'base', forced = base || p.mode === 'forced';
+    const base = p.mode === 'base', baseAcc=base && p.baseInput==='acceleration', harmonic=sys.supportsSteady;
     $('damperGroup').style.opacity = p.zeta === 0 ? '0.22' : '1';
     $('fourthLabel').innerHTML = base ? '相对位移 u <small>m</small>' : '机械能 E <small>J</small>';
-    $('coordinateNote').textContent = base ? 'y = Y sin(ωt)；u = x − y。初始条件输入为绝对 x₀、v₀；内部自动转换 u̇₀ = v₀ − Yω。' : 'x 从静平衡位置量起，向右为正；v = ẋ，a = ẍ。激励从 t = 0 起按正弦变化。';
-    const freqTab = document.querySelector('[data-chart="frequency"]'); freqTab.disabled = !forced;
-    if (!forced && chartType === 'frequency') chartType = 'time';
-    const d = sys.d, f = V.frequency(p);
-    const metrics = [['固有圆频率 ωₙ', fmt(d.wn, 3), 'rad/s'], ['固有周期 Tₙ', fmt(d.Tn, 3), 's'], ['阻尼系数 c', fmt(d.c, 3), 'N·s/m'], ...(forced ? [['激励圆频率 ω', fmt(d.omega, 3), 'rad/s'], [base ? '谐波幅值比 X/Y' : '谐波幅值比 X/(F₀/k)', fmt(f.gain, 3), '']] : [['阻尼圆频率 ωd', d.wd === null ? '无' : fmt(d.wd, 3), 'rad/s'], ['临界阻尼 cc', fmt(d.cc, 3), 'N·s/m']])];
-    $('metrics').innerHTML = metrics.map(([a, b, c]) => `<div><span>${a}</span><strong>${b}</strong><small>${c}</small></div>`).join('');
-    const common = '<p class="theory-math">ωₙ = √(k/m)，Tₙ = 2π/ωₙ，ζ = c/(2√(km))，r = ω/ωₙ。</p>';
-    $('theory').innerHTML = common + (base ? '<p class="theory-math">X/Y = √[1 + (2ζr)²] / √[(1 − r²)² + (2ζr)²]<br>U/Y = r² / √[(1 − r²)² + (2ζr)²]</p><p>本实验的输入是基础位移，不是指定地震加速度。弹簧势能为 ½ku²，动能为 ½mẋ²；基础通过支座做功，机械能不守恒。</p>' : p.mode === 'forced' ? '<p class="theory-math">X = (F₀/k) / √[(1 − r²)² + (2ζr)²]<br>φ = atan2(2ζr, 1 − r²)，xₚ = X sin(ωt − φ)</p><p>ζ = 0 且 r = 1、F₀ ≠ 0 时无有界谐波特解；零初始条件下 x = F₀/(2k) [sin(ωₙt) − ωₙt cos(ωₙt)]。r = 0 时正弦输入恒为零，幅频图端点仅表示 r → 0⁺ 的极限。</p>' : '<p class="theory-math">ζ &lt; 1：ωd = ωₙ√(1 − ζ²)<br>x = e<sup>−ζωₙt</sup>[x₀ cos(ωdt) + (v₀ + ζωₙx₀) sin(ωdt)/ωd]</p><p>ζ = 1 时 x = [x₀ + (v₀ + ωₙx₀)t]e<sup>−ωₙt</sup>。ζ &gt; 1 时是两个衰减指数的组合。仅欠阻尼存在阻尼振动周期；非零初始振幅下，对数减量 δ = 2πζ/√(1 − ζ²)（0 &lt; ζ &lt; 1）。</p>');
-    if (forced) $('theory').innerHTML += '<p>零激励幅值时，实际激励为零；共振点的传递函数仍为奇点，但零输入不会凭空产生共振增长。频响相位以输入正弦为基准，输出滞后为正。</p>';
+    $('coordinateNote').textContent = baseAcc ? '输入 ÿ = Aᵍ sin(ωt+θ)，u=x−y；基础初始位移和速度为零。稳态指相对位移 u；绝对位移 x 可包含基础运动的漂移。' : base ? '输入 y=Y sin(ωt+θ)，u=x−y；初位移、初速度均为绝对 x₀、v₀，内部按实际 y₀、ẏ₀ 转换。' : '位移 x 从静平衡位置量起；初始条件在 t=0 定义，向右为正。传递力 Fₜ=kx+cv。';
+    for(const type of ['frequency','phaseFrequency']) document.querySelector('[data-chart="'+type+'"]').disabled=!harmonic;
+    if(!harmonic && ['frequency','phaseFrequency'].includes(chartType)) chartType='time';
+    $('response').value=p.response;
+    $('response').querySelector('[value="steady"]').disabled=!sys.hasSteady;
+    $('components').disabled=!sys.hasSteady || p.response!=='full';
+    if($('components').disabled) $('components').checked=false;
+    let note = sys.responseWarning || (harmonic ? p.response==='steady' ? '稳态模式不使用 x₀、v₀。ζ>0 时，全响应的瞬态分量衰减后趋于此解。' : '全响应 = 稳态特解 + 初始条件对应的瞬态分量。ζ=0 时自由分量不会衰减。' : '');
+    if(harmonic && !sys.hasSteady) note='存在无阻尼共振谐波，无有界稳态；当前显示全响应。';
+    if(p.mode==='periodic') note+=' 输入及响应均按最高阶数 N='+p.harmonics+' 的傅里叶级数计算；不连续波形附近存在 Gibbs 现象。';
+    if(p.mode==='arbitrary') note=p.load==='impulse' ? '冲量在 t₀ 使速度瞬时改变 Δv=J/m；位移连续。图中读数取冲量后的右极限，冲量能量跳变不包含在普通功率积分中。' : p.load==='halfSine' ? '半正弦在 600 个等长区间内线性近似；每个区间进行精确状态推进。' : p.load==='csv' ? '分段线性力时程；末点以后保持末值，填 0 可结束荷载。' : p.load==='chirp' ? '从 ω 起按线性规律扫频，观察时长结束时达到 2ω（从 t₀ 起计算）。激励以分段线性采样近似。' : '阶跃/脉冲边界取右极限；分段线性荷载区间采用矩阵指数精确推进。';
+    if(baseAcc) note+=' 稳态与相频以相对坐标和等效惯性力 −mÿ 为基准。';
+    $('responseNote').textContent=note;
+    const d=sys.d, f=V.frequency(p), forceAmp=p.mode==='unbalance'?p.m*p.mu*p.eccentricity*d.omega*d.omega:p.F;
+    const metrics=[['固有圆频率 ωₙ',fmt(d.wn,3),'rad/s'],['固有周期 Tₙ',fmt(d.Tn,3),'s'],['阻尼系数 c',fmt(d.c,3),'N·s/m'],...(harmonic?[['激励圆频率 ω',fmt(d.omega,3),'rad/s'],[p.mode==='periodic'?'有效谐波数':base?'当前传递函数幅值比':p.mode==='unbalance'?'不平衡力幅 F₀':'谐波位移幅 X',p.mode==='periodic'?String(sys.harmonics.length):fmt(p.mode==='unbalance'?forceAmp:base?f.gain:f.amplitude,4),p.mode==='unbalance'?'N':base||p.mode==='periodic'?'':'m']]:[['阻尼圆频率 ωd',d.wd===null?'无':fmt(d.wd,3),'rad/s'],['临界阻尼 cc',fmt(d.cc,3),'N·s/m']])];
+    $('metrics').innerHTML=metrics.map(([a,b,c])=>'<div><span>'+a+'</span><strong>'+b+'</strong><small>'+c+'</small></div>').join('');
+    if(baseAcc) $('equation').textContent='m ü + c u̇ + k u = −m Aᵍ sin(ωt + θ)';
+    const common='<p class="theory-math">ωₙ=√(k/m)，Tₙ=2π/ωₙ，c=2ζ√(km)，r=ω/ωₙ。</p><p>质量集中、刚度线性、黏性阻尼、参数恒定；不包括干摩擦、非线性刚度、碰撞和随机振动统计。</p>';
+    const D='√[(1−r²)²+(2ζr)²]';
+    const theories={
+      free:'<p>x=x₀ cos(ωₙt)+(v₀/ωₙ)sin(ωₙt)，E=½mv²+½kx²。</p>',
+      damped:'<p>欠阻尼 ωd=ωₙ√(1−ζ²)，x=e<sup>−ζωₙt</sup>[x₀ cos(ωdt)+(v₀+ζωₙx₀)sin(ωdt)/ωd]。临界阻尼为指数乘一次多项式，过阻尼为两个实指数之和。ζ≥1 不存在周期振荡。</p>',
+      forced:'<p>X=(F₀/k)/'+D+'，φ=atan2(2ζr,1−r²)。稳态特解 xₛ=X sin(ωt+θ−φ)。全响应 x=xₛ+xₜ。力传递率 |Fₜ|/F₀=√[1+(2ζr)²]/'+D+'。</p>',
+      unbalance:'<p>mₑ=μm，F₀=mₑeω²；m 为总支承质量（含 mₑ）。X/(μe)=r²/'+D+'。高转速下 X→μe。该模型是一维投影、匀速旋转，不计启停转速变化。</p>',
+      base:'<p>指定基础位移时 X/Y=√[1+(2ζr)²]/'+D+'，U/Y=r²/'+D+'；X/Y&lt;1 的阈值 r&gt;√2。指定基础加速度时相对位移幅 U=(Aᵍ/ωₙ²)/'+D+'。</p><p>基础加速度积分采用 y(0)=ẏ(0)=0，可能产生位移漂移。不能把相对位移 u 与绝对位移 x 混用。</p>',
+      periodic:'<p>方波：奇数阶 bₙ=4F/(πn)；三角波：奇数阶 bₙ=8F(−1)<sup>(n−1)/2</sup>/(π²n²)；锯齿波：bₙ=2F(−1)<sup>n+1</sup>/(πn)。三频叠加系数为 F、0.35F、0.2F。相位为 nθ。</p><p>分别求各谐波的全响应/稳态后叠加。任一非零谐波 nω=ωₙ 且 ζ=0 时没有有界周期稳态。幅频/相频显示系统对单个单位谐波的频响，不是整个非正弦波的单一幅值。</p>',
+      arbitrary:'<p>全响应 x(t)=x<sub>自由</sub>(t)+∫₀ᵗh(t−τ)F(τ)dτ。欠阻尼 h(t)=e<sup>−ζωₙt</sup>sin(ωdt)/(mωd)；临界 h(t)=t e<sup>−ωₙt</sup>/m。计算以等价状态空间推进实现卷积。</p><p>阶跃 F·H(t−t₀)；斜坡在 τ 内从 0 升到 F 并保持；矩形/三角/半正弦脉冲在 τ 后归零。理想冲量令 x 连续，v(t₀⁺)=v(t₀⁻)+J/m。无阻尼零初始条件阶跃最大位移为 2F/k。</p>'
+    };
+    $('theory').innerHTML=common+theories[p.mode]+'<p>无阻尼精确共振且激励非零时没有有界稳态；r=0 表示零频率，正弦与初相位共同决定是否成为常值输入。频响端点表示低频极限。</p>';
+    $('dampingValues').textContent=sys.damping.delta===null?'当前参数不满足 0<ζ<1 的对数减量法条件。':'当前模型理论值：δ='+fmt(sys.damping.delta,4)+'，Td='+fmt(sys.damping.Td,4)+' s。';
     updateComparison(); updateChartTabs(); render();
   }
   function updateComparison() {
@@ -214,6 +463,7 @@ main > .modes{margin-top:24px}
   function updateChartTabs() {
     document.querySelectorAll('[data-chart]').forEach(b => b.setAttribute('aria-selected', b.dataset.chart === chartType));
     $('quantity').hidden = chartType !== 'time';
+    $('freqKind').hidden = !['frequency','phaseFrequency'].includes(chartType);
   }
   function stage(s) {
     const scale = 150 / visualPeak, offset = s.x * scale, left = 420 + offset, by = s.y * scale, anchor = 118 + by;
@@ -224,13 +474,17 @@ main > .modes{margin-top:24px}
     path += `H${left}`; $('spring').setAttribute('d', path);
     const center = anchor + (left - anchor) * 0.52;
     $('damper').setAttribute('d', `M${anchor} 135H${center - 20}M${center + 22} 122H${center - 20}V148H${center + 22}M${center + 7} 125V145M${center + 7} 135H${left}`);
-    const showForce = p.mode === 'forced' && Math.abs(s.force) > 0.001;
-    $('forceArrow').setAttribute('d', showForce ? `M${left + 100} 113h${Math.sign(s.force) * (12 + Math.abs(s.force) / Math.max(p.F, 0.001) * 55)}` : '');
-    $('forceLabel').style.display = p.mode === 'forced' ? '' : 'none';
+    const showForce = p.mode !== 'base' && Math.abs(s.force) > 0.001;
+    $('forceArrow').setAttribute('d', showForce ? `M${s.force >= 0 ? left + 100 : left} 113h${Math.sign(s.force) * (12 + Math.min(1, Math.abs(s.force) / visualForcePeak) * 55)}` : '');
+    $('forceLabel').setAttribute('x',s.force >= 0 ? left + 110 : left - 80); $('forceLabel').setAttribute('y',55);
+    $('forceLabel').style.display = ['forced','unbalance','periodic','arbitrary'].includes(p.mode) ? '' : 'none';
+    $('rotor').toggleAttribute('hidden',p.mode!=='unbalance'); $('massText').style.display=p.mode==='unbalance'?'none':'';
+    $('rotorArm').setAttribute('transform','rotate('+((sys.d.omega*s.t+p.phi*Math.PI/180)*180/Math.PI-90)+' 470 115)');
     $('baseLabel').textContent = p.mode === 'base' ? '移动支座 y(t)' : '固定支座';
     $('scaleNote').textContent = '运动示意 · 100 px ≈ ' + fmt(100 / scale, 3) + ' m（自动缩放）';
   }
   function render() {
+    if (!running) $('play').textContent = t >= p.duration ? '↺ 再做一次' : '▶ 开始实验';
     const s = sys.at(t); $('timeValue').textContent = fmt(t, 3); $('scrub').value = t;
     $('readX').textContent = fmt(s.x); $('readV').textContent = fmt(s.v); $('readA').textContent = fmt(s.a); $('readE').textContent = fmt(p.mode === 'base' ? s.u : s.energy);
     stage(s); drawChart(s);
@@ -252,14 +506,15 @@ main > .modes{margin-top:24px}
     }
     const point = (a, x, y) => a.map(s => [s[x], s[y]]);
     if (chartType === 'time') {
-      const names = { x: ['位移时程', 'x / m'], v: ['速度时程', 'v / (m/s)'], a: ['加速度时程', 'a / (m/s²)'] };
+      const names = { x: ['绝对位移时程','x / m'], v:['速度时程','v / (m/s)'], a:['加速度时程','a / (m/s²)'], u:['相对位移时程','u / m'], Ft:['传递力时程','Fₜ / N'] };
       $('chartTitle').textContent = names[quantity][0]; yLabel = names[quantity][1];
       series.push({ pts: point(points, 't', quantity), color: colors.teal, live: true });
-      let legend = '<span>当前实验</span>';
+      let legend = '<span>'+ (p.response==='steady'?'稳态响应':'全响应') +'</span>';
+      if($('components').checked && sys.hasSteady && ['x','v','a'].includes(quantity)) { const sk={x:'steadyX',v:'steadyV',a:'steadyA'}[quantity],tk={x:'transientX',v:'transientV',a:'transientA'}[quantity]; series.push({pts:point(points,'t',sk),color:colors.orange,dashed:true}); series.push({pts:point(points,'t',tk),color:colors.blue,dashed:true});legend+='<span class="orange">稳态</span><span class="blue">瞬态</span>'; }
       if (p.mode === 'base' && quantity === 'x') { series.push({ pts: point(points, 't', 'y'), color: colors.orange, dashed: true }); legend += '<span class="orange">基础 y</span>'; }
       if (comp) { series.push({ pts: point(comp.points.filter(a => a.t <= p.duration), 't', quantity), color: colors.blue, dashed: true }); legend += '<span class="blue">保留对照</span>'; }
       [ymin, ymax] = range(series.flatMap(s => s.pts.map(a => a[1]))); marker = [t, current[quantity]];
-      $('legend').innerHTML = legend; $('chartNote').textContent = '淡线预览整个实验；深线为已播放部分。曲线和读数均包含初始条件引起的响应。' + (p.duration * Math.max(sys.d.wn, sys.d.omega) / (2 * Math.PI) > pw / 5 ? '波形密集，缩短观察时长可看清细节。' : '');
+      $('legend').innerHTML = legend; $('chartNote').textContent = '淡线预览整个实验；深线为已播放部分。全响应包含初始条件；稳态模式显示谐波特解。' + (p.duration * Math.max(sys.d.wn, sys.d.omega * (p.mode === 'periodic' ? p.harmonics : 1)) / (2 * Math.PI) > pw / 5 ? '波形密集，缩短观察时长可看清细节。' : '');
     } else if (chartType === 'phase') {
       $('chartTitle').textContent = '相平面 · 绝对位移与速度'; yLabel = 'v / (m/s)'; xLabel = 'x / m';
       series.push({ pts: point(points, 'x', 'v'), color: colors.teal, live: true });
@@ -273,19 +528,29 @@ main > .modes{margin-top:24px}
       [ymin, ymax] = range(points.map(a => a.energy)); ymin = 0;
       $('legend').innerHTML = '<span>机械能 E</span><span class="orange">动能 K</span><span class="blue">势能 V</span>';
       $('chartNote').textContent = p.mode === 'base' ? 'K = ½mẋ²，V = ½ku²。移动支座会输入或带走能量；本图不叠加对照。' : 'K = ½mv²，V = ½kx²，E = K + V。有阻尼自由振动满足 dE/dt = −cv²；本图不叠加对照。';
+    } else if(chartType==='input') {
+      const base=p.mode==='base', acc=base&&p.baseInput==='acceleration', impulse=p.mode==='arbitrary'&&p.load==='impulse';
+      const key=base?(acc?'ya':'y'):'force'; yLabel=impulse?'J / (N·s)':base?(acc?'ÿ / (m/s²)':'y / m'):'F / N';
+      $('chartTitle').textContent=impulse?'冲量与作用时刻':base?'基础输入时程':'激励力时程';
+      const pts=impulse?[[0,0],[p.delay,0],[p.delay,p.J],[p.delay,0],[p.duration,0]]:point(points,'t',key);
+      series.push({pts,color:colors.orange}); [ymin,ymax]=range(pts.map(a=>a[1]));
+      $('legend').innerHTML='<span class="orange">输入</span>';
+      $('chartNote').textContent=impulse?'竖线表示冲量大小，不表示有限的力峰值；速度在作用时刻跳变。':p.mode==='periodic'?'实际施加的是 N 阶傅里叶截断波形；提高 N 观察逼近与 Gibbs 现象。':'阶跃和脉冲边界采用右侧值。初始条件不属于外部激励。';
     } else {
-      $('chartTitle').textContent = p.mode === 'base' ? '绝对位移传递率 X/Y' : '位移放大系数 X/(F₀/k)'; xLabel = 'r = ω/ωₙ'; yLabel = '幅值比'; xmin = 0; xmax = 4; ymin = 0;
-      function freqSeries(params) { return Array.from({ length: 1001 }, (_, i) => { const r = i * .004; return [r, V.frequency(params, r).gain]; }); }
-      const mainPts = freqSeries(p); series.push({ pts: mainPts, color: colors.teal });
-      const comparable = comp && comp.p.mode === p.mode;
-      if (comparable) series.push({ pts: freqSeries(comp.p), color: colors.blue, dashed: true });
-      const finite = series.flatMap(s => s.pts.map(a => a[1])).filter(Number.isFinite);
-      ymax = Math.min(30, Math.max(2, ...finite) * 1.1);
-      const f = V.frequency(p); marker = Number.isFinite(f.gain) && f.gain <= ymax ? [p.r, f.gain] : null;
-      if (finite.some(v => v > ymax) || !Number.isFinite(f.gain) || p.zeta === 0) clipNotice = ` 纵轴上限 ${fmt(ymax, 1)}，超界峰值未显示；无阻尼 r = 1 为奇点。`;
-      $('legend').innerHTML = '<span>谐波特解幅值比</span>' + (comparable ? '<span class="blue">保留对照</span>' : '');
-      $('chartNote').textContent = `当前比值 ${fmt(f.gain, 3)}，幅值 X = ${fmt(f.amplitude)} m，滞后 φ = ${f.phase === null ? '无定义' : fmt(f.phase * 180 / Math.PI, 1) + '°'}。` + (p.r === 0 ? 'r=0 时正弦输入恒为零，曲线端点为低频极限。' : '') + clipNotice;
-      if (p.mode === 'base') series.push({ pts: [[0, 1], [4, 1]], color: '#aab6aa', dashed: true });
+      const isPhase=chartType==='phaseFrequency', kind=$('freqKind').value, base=p.mode==='base', baseAcc=base&&p.baseInput==='acceleration';
+      const name=kind==='transmission'?(base?'基础绝对位移/加速度传递率':'力传递率 |Fₜ|/F₀'):base?(baseAcc?'相对位移放大率 U/(Aᵍ/ωₙ²)':'绝对位移传递率 X/Y'):p.mode==='unbalance'?'不平衡位移比 X/(μe)':'位移放大系数 X/(F₀/k)';
+      $('chartTitle').textContent=(isPhase?'相频 · ':'幅频 · ')+name; xLabel='r = ω/ωₙ'; yLabel=isPhase?'滞后 / °':'幅值比'; xmin=0;xmax=4;
+      function freqSeries(params){return Array.from({length:1001},(_,i)=>{const r=i*.004,f=V.frequency(params,r,kind);return[r,isPhase?(f.phase===null?NaN:f.phase*180/Math.PI):f.gain];});}
+      series.push({pts:freqSeries(p),color:colors.teal});
+      const comparable=comp&&comp.p.mode===p.mode&&(p.mode!=='base'||comp.p.baseInput===p.baseInput);
+      if(comparable)series.push({pts:freqSeries(comp.p),color:colors.blue,dashed:true});
+      const finite=series.flatMap(s=>s.pts.map(a=>a[1])).filter(Number.isFinite);
+      ymin=0;ymax=isPhase?180:Math.min(30,Math.max(2,...finite)*1.1);
+      const f=V.frequency(p,p.r,kind),value=isPhase?(f.phase===null?NaN:f.phase*180/Math.PI):f.gain;
+      marker=Number.isFinite(value)&&value<=ymax?[p.r,value]:null;
+      $('legend').innerHTML='<span>单位谐波频响</span>'+(comparable?'<span class="blue">保留对照</span>':'');
+      $('chartNote').textContent='当前幅值比 '+fmt(f.gain,3)+'；滞后 '+(f.phase===null?'无定义':fmt(f.phase*180/Math.PI,1)+'°')+'。'+(p.mode==='periodic'?'此图为单一谐波的系统频响。':'')+(baseAcc?(kind==='transmission'?'绝对加速度相位以基础加速度 ÿ 为基准。':'相对响应相位以等效惯性力 −mÿ 为基准。'):'')+(!isPhase?'超出纵轴上限 '+fmt(ymax,1)+' 的峰值不显示。':'')+'无阻尼 r=1 为奇点。';
+      if(!isPhase&&(base||kind==='transmission'))series.push({pts:[[0,1],[4,1]],color:'#aab6aa',dashed:true});
     }
     const xp = x => box.l + (x - xmin) / (xmax - xmin) * pw, yp = y => box.t + ph - (y - ymin) / (ymax - ymin) * ph;
     const tick = n => Math.abs(n) >= 1000 || (Math.abs(n) > 0 && Math.abs(n) < .001) ? n.toExponential(1) : Number(n.toPrecision(3)).toString();
@@ -304,11 +569,12 @@ main > .modes{margin-top:24px}
     if (ymin < 0 && ymax > 0) { ctx.strokeStyle = '#b9c8bd'; ctx.beginPath(); ctx.moveTo(box.l, yp(0)); ctx.lineTo(w - box.r, yp(0)); ctx.stroke(); }
     function line(pts, color, dash, alpha, limit = pts.length) {
       ctx.strokeStyle = color; ctx.lineWidth = 1.7; ctx.globalAlpha = alpha; ctx.setLineDash(dash ? [5, 4] : []); ctx.beginPath(); let open = false;
-      for (let i = 0; i < Math.min(pts.length, limit); i++) { const [x, y] = pts[i]; if (!Number.isFinite(y) || (chartType === 'frequency' && y > ymax)) { open = false; continue; } const xx = xp(x), yy = yp(y); if (open) ctx.lineTo(xx, yy); else ctx.moveTo(xx, yy); open = true; }
+      for (let i = 0; i < Math.min(pts.length, limit); i++) { const [x, y] = pts[i]; if (!Number.isFinite(y) || (['frequency','phaseFrequency'].includes(chartType) && y > ymax)) { open = false; continue; } const xx = xp(x), yy = yp(y); if (open) ctx.lineTo(xx, yy); else ctx.moveTo(xx, yy); open = true; }
       ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha = 1;
     }
-    for (const s of series) { if (s.live) { line(s.pts, s.color, false, .18); line(s.pts, s.color, false, 1, Math.floor(t / p.duration * (points.length - 1)) + 1); } else line(s.pts, s.color, s.dashed, .85); }
-    if (chartType === 'time' || chartType === 'energy') { ctx.strokeStyle = '#7d9d8d'; ctx.setLineDash([3, 4]); ctx.beginPath(); ctx.moveTo(xp(t), box.t); ctx.lineTo(xp(t), h - box.b); ctx.stroke(); ctx.setLineDash([]); }
+    let lo=0,hi=points.length; while(lo<hi){const mid=Math.floor((lo+hi)/2);if(points[mid].t<=t)lo=mid+1;else hi=mid;}
+    for (const s of series) { if (s.live) { line(s.pts, s.color, false, .18); line(s.pts, s.color, false, 1, lo); } else line(s.pts, s.color, s.dashed, .85); }
+    if (['time','energy','input'].includes(chartType)) { ctx.strokeStyle = '#7d9d8d'; ctx.setLineDash([3, 4]); ctx.beginPath(); ctx.moveTo(xp(t), box.t); ctx.lineTo(xp(t), h - box.b); ctx.stroke(); ctx.setLineDash([]); }
     if (marker) { ctx.fillStyle = colors.teal; ctx.beginPath(); ctx.arc(xp(marker[0]), yp(marker[1]), 4, 0, Math.PI * 2); ctx.fill(); ctx.strokeStyle = '#fffefa'; ctx.lineWidth = 1.5; ctx.stroke(); }
     ctx.restore();
   }
@@ -319,6 +585,9 @@ main > .modes{margin-top:24px}
   document.querySelectorAll('[data-mode]').forEach(b => b.addEventListener('click', () => changeMode(b.dataset.mode, b.dataset.mode === 'free' ? { zeta: 0 } : p.zeta === 0 ? { zeta: .08 } : {})));
   document.querySelectorAll('[data-chart]').forEach(b => b.addEventListener('click', () => { chartType = b.dataset.chart; updateChartTabs(); render(); }));
   $('quantity').addEventListener('change', render);
+  $('freqKind').addEventListener('change',render);
+  $('components').addEventListener('change',render);
+  $('response').addEventListener('change',e=>{p.response=e.target.value;rebuild();});
   $('play').addEventListener('click', () => { if (t >= p.duration) t = 0; setRunning(!running); render(); });
   $('restart').addEventListener('click', () => { t = 0; setRunning(false); render(); });
   $('step').addEventListener('click', () => { setRunning(false); t = Math.min(p.duration, t + .02); render(); });
@@ -329,24 +598,29 @@ main > .modes{margin-top:24px}
   $('preset').addEventListener('change', e => {
     const presets = {
       period: { mode: 'free', m: 2, k: 100, zeta: 0, x0: .08, v0: 0 }, critical: { mode: 'damped', zeta: 1, x0: .08, v0: 0 }, over: { mode: 'damped', zeta: 2, x0: .08, v0: 0 },
-      resonance: { mode: 'forced', zeta: 0, r: 1, x0: 0, v0: 0, F: 4, duration: 12 }, beats: { mode: 'forced', zeta: 0, r: .9, x0: 0, v0: 0, F: 4, duration: 20 }, isolation: { mode: 'base', zeta: .1, r: 3, Y: .02, x0: 0, v0: 0, duration: 12 }
+      resonance: { mode: 'forced', zeta: 0, r: 1, x0: 0, v0: 0, F: 4, duration: 12 }, beats: { mode: 'forced', zeta: 0, r: .9, x0: 0, v0: 0, F: 4, duration: 20 }, rotor:{mode:'unbalance',mu:.1,eccentricity:.02,r:2,x0:0,v0:0}, harmonicResonance:{mode:'periodic',wave:'square',harmonics:9,r:1/3,zeta:0,x0:0,v0:0,duration:20}, stepLoad:{mode:'arbitrary',load:'step',delay:.5,x0:0,v0:0,zeta:0}, pulseLoad:{mode:'arbitrary',load:'halfSine',tau:.3,delay:.5,x0:0,v0:0}, impulseLoad:{mode:'arbitrary',load:'impulse',J:.4,delay:.5,x0:0,v0:0}, custom:{mode:'arbitrary',load:'csv',x0:0,v0:0}, isolation: { mode: 'base', zeta: .1, r: 3, Y: .02, x0: 0, v0: 0, duration: 12 }
     };
     if (presets[e.target.value]) { p = { ...V.DEFAULTS, ...presets[e.target.value] }; buildFields(); rebuild(); notify('已载入课堂情景，点击开始实验'); }
     e.target.value = '';
   });
   $('exportCSV').addEventListener('click', () => {
-    const keys = ['t', 'x', 'v', 'a', 'u', 'uv', 'ua', 'y', 'yv', 'force', 'kinetic', 'potential', 'energy', 'dampingPower', 'inputPower'];
-    const metadata = '# Vibration Lab v1.0.0; SI units; ' + JSON.stringify(p) + '\r\n';
-    const header = 't_s,x_m,v_m_s,a_m_s2,u_m,uv_m_s,ua_m_s2,y_m,yv_m_s,external_force_N,kinetic_J,potential_J,energy_J,damping_power_W,input_power_W';
-    download('vibration-' + p.mode + '.csv', '\uFEFF' + metadata + header + '\r\n' + points.map(s => keys.map(k => s[k].toPrecision(12)).join(',')).join('\r\n'), 'text/csv;charset=utf-8');
+    const keys = ['t','x','v','a','u','uv','ua','y','yv','ya','force','effectiveForce','Ft','kinetic','potential','energy','dampingPower','inputPower','steadyX','steadyV','steadyA','transientX','transientV','transientA'];
+    const metadata = '# Vibration Lab v1.0.1; SI units; ' + JSON.stringify(p) + '\r\n';
+    const header = 't_s,x_m,v_m_s,a_m_s2,u_m,uv_m_s,ua_m_s2,y_m,yv_m_s,ya_m_s2,external_force_N,effective_force_N,transmitted_force_N,kinetic_J,potential_J,energy_J,damping_power_W,input_power_W,steady_x_m,steady_v_m_s,steady_a_m_s2,transient_x_m,transient_v_m_s,transient_a_m_s2';
+    download('vibration-' + p.mode + '.csv', '\uFEFF' + metadata + header + '\r\n' + points.map(s => keys.map(k => s[k]===null?'':s[k].toPrecision(12)).join(',')).join('\r\n'), 'text/csv;charset=utf-8');
   });
   $('exportConfig').addEventListener('click', () => download('vibration-parameters.json', JSON.stringify({ version: 1, parameters: p }, null, 2), 'application/json'));
   $('importConfig').addEventListener('click', () => $('configFile').click());
   $('configFile').addEventListener('change', async e => {
     const file = e.target.files[0]; if (!file) return;
-    try { if (file.size > 20000) throw Error('文件过大'); const data = JSON.parse(await file.text()); if (data.version !== 1 || !data.parameters || Object.keys(V.DEFAULTS).some(k => !(k in data.parameters))) throw Error('格式或版本不匹配'); const clean = Object.fromEntries(Object.keys(V.DEFAULTS).map(k => [k, data.parameters[k]])); p = V.validate(clean); buildFields(); rebuild(); notify('参数已载入'); }
+    try { if (file.size > 180000) throw Error('文件过大'); const data = JSON.parse(await file.text()); if (data.version !== 1 || !data.parameters || Object.keys(Vibration.DEFAULTS).some(k => !(k in data.parameters))) throw Error('格式或版本不匹配'); const clean = Object.fromEntries(Object.keys(V.DEFAULTS).map(k => [k, data.parameters[k]===undefined?V.DEFAULTS[k]:data.parameters[k]])); p = V.validate(clean); buildFields(); rebuild(); notify('参数已载入'); }
     catch (err) { notify('无法载入参数：' + err.message); } finally { e.target.value = ''; }
   });
+  $('applyLoad').addEventListener('click',()=>{try{V.parseLoad($('loadCSV').value);p.csv=$('loadCSV').value;rebuild();$('loadFeedback').textContent='时程已应用';}catch(err){$('loadFeedback').textContent=err.message;notify(err.message);}});
+  $('importLoad').addEventListener('click',()=>$('loadFile').click());
+  $('loadFile').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>150000)throw Error('文件过大');const text=(await file.text()).replace(/^\uFEFF/,'');V.parseLoad(text);p.csv=text;buildFields();rebuild();$('loadFeedback').textContent='已载入 '+file.name;}catch(err){notify('时程载入失败：'+err.message);}finally{e.target.value='';}});
+  $('sampleLoad').addEventListener('click',()=>download('load-example.csv','t_s,F_N\r\n0,0\r\n0.5,0\r\n1,4\r\n1.5,-2\r\n2,0\r\n12,0','text/csv;charset=utf-8'));
+  $('identify').addEventListener('click',()=>{try{const z=V.identify(Number($('peak1').value),Number($('peak2').value),Number($('peakTime').value),Number($('peakCycles').value));$('identifyResult').textContent='δ='+fmt(z.delta,4)+'，ζ='+fmt(z.zeta,4)+'，ωd='+fmt(z.wd,3)+' rad/s，ωₙ='+fmt(z.wn,3)+' rad/s';}catch(err){$('identifyResult').textContent=err.message;}});
   for (const [button, dialog] of [['helpBtn', 'helpDialog'], ['aboutBtn', 'aboutDialog']]) $(button).addEventListener('click', () => { setRunning(false); $(dialog).showModal(); });
   document.querySelectorAll('.close-dialog').forEach(b => b.addEventListener('click', () => b.closest('dialog').close()));
   document.querySelectorAll('dialog').forEach(d => d.addEventListener('click', e => { if (e.target === d) { const r = d.getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) d.close(); } }));
@@ -354,7 +628,7 @@ main > .modes{margin-top:24px}
   window.addEventListener('resize', () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(render); });
   function loop(now) { if (running) { if (last) t = Math.min(p.duration, t + Math.min((now - last) / 1000, .1) * Number($('speed').value)); last = now; if (t >= p.duration) setRunning(false); render(); } requestAnimationFrame(loop); }
   buildFields(); rebuild();
-  const check = V.selfCheck(); $('checkStatus').textContent = check.pass ? '计算内核自检通过 · 3 项基准' : '计算自检异常，请停止使用';
+  const check = V.selfCheck(); $('checkStatus').textContent = check.pass ? '计算内核自检通过 · '+check.checks+' 项基准' : '计算自检异常，请停止使用';
   $('selfCheckDetail').textContent = `启动自检：${check.checks} 项解析基准，最大位移绝对误差 ${check.maxError.toExponential(2)} m。完整独立数值测试见源码包的验证报告。`;
   if (!check.pass) { $('play').disabled = true; notify('计算自检未通过，请检查文件完整性'); }
   requestAnimationFrame(loop);

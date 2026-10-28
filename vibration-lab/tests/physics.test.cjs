@@ -150,6 +150,6 @@ test('Standalone build contains no external executable or asset dependency', () 
   assert.ok(!/<script[^>]+src=|<link[^>]+href=|<img[^>]+src=|@import|fetch\(|XMLHttpRequest|https?:\/\/[^\s"']+\.(?:js|css)/i.test(html));
   assert.ok(!/<!-- (STYLE|PHYSICS|APP) -->/.test(html)); assertions += 2;
 });
-const report = { version: '1.0.0', runUTC: new Date().toISOString(), node: process.version, suiteCount: checks, assertions, results, status: 'PASS' };
-fs.writeFileSync(path.join(__dirname, '../VERIFICATION.json'), JSON.stringify(report, null, 2));
+const report = { version: '1.0.1', runUTC: new Date().toISOString(), node: process.version, suiteCount: checks, assertions, results, status: 'PASS' };
+fs.writeFileSync(path.join(__dirname, '../VERIFICATION-core.json'), JSON.stringify(report, null, 2));
 console.log(`\n${checks} suites, ${assertions} assertions passed.`);
