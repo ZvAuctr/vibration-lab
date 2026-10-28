@@ -103,4 +103,4 @@ npm test
 - [Virtual Labs · Forced Vibration of S.D.O.F System](https://sd-iiith.vlabs.ac.in/exp/forced-vibration/procedure.html)：围绕质量、刚度与频率比进行控制变量探究。
 - [《力学理论课程的互动虚拟实验平台建设与实践》](https://www.sy.uestc.edu.cn/article/doi/10.12179/1672-4550.20240184?viewType=HTML)：按课程知识点安排振动实验并连接公式与现象。
 
-当前名称和界面未使用学校标识；老师可在保留 MIT 许可证的基础上修改标题和课程信息。源码包可上传到 GitHub、Gitee 或学校代码仓库；本次只交付文件，没有替用户创建远程仓库。
+当前名称和界面未使用学校标识；老师可在保留 MIT 许可证的基础上修改标题和课程信息。源码包可上传到 GitHub、Gitee 或学校代码仓库。
