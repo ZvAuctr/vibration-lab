@@ -1,0 +1,97 @@
+{
+  "version": "1.0.0",
+  "runUTC": "2026-10-28T11:23:31.126Z",
+  "node": "v24.18.0",
+  "suiteCount": 15,
+  "assertions": 33329,
+  "results": [
+    {
+      "name": "All modes preserve absolute initial displacement and velocity",
+      "status": "PASS",
+      "ms": 1
+    },
+    {
+      "name": "Closed-form free response across all damping regimes and near criticality",
+      "status": "PASS",
+      "ms": 8
+    },
+    {
+      "name": "Undamped period, velocity, acceleration and conserved energy",
+      "status": "PASS",
+      "ms": 16
+    },
+    {
+      "name": "Exact and near resonance agree with independent undamped closed form",
+      "status": "PASS",
+      "ms": 1
+    },
+    {
+      "metric": "worst RK4 absolute x/v difference",
+      "value": 3.447855334570704e-10
+    },
+    {
+      "name": "Independent RK4 cross-check in absolute coordinates, deterministic parameter grid",
+      "status": "PASS",
+      "ms": 106
+    },
+    {
+      "metric": "RK4 halved-step x errors (m)",
+      "value": [
+        0.0000013265867556191968,
+        9.204248426972206e-8,
+        5.943373862504764e-9
+      ]
+    },
+    {
+      "name": "RK4 fourth-order convergence toward the engine",
+      "status": "PASS",
+      "ms": 1
+    },
+    {
+      "name": "Finite-difference kinematics and equation residual in ground coordinates",
+      "status": "PASS",
+      "ms": 1
+    },
+    {
+      "name": "Trajectory recurrence agrees with direct matrix exponential",
+      "status": "PASS",
+      "ms": 13
+    },
+    {
+      "name": "Energy balance including viscous loss, external work and moving-support work",
+      "status": "PASS",
+      "ms": 56
+    },
+    {
+      "name": "Frequency response matches initialized harmonic particular solution",
+      "status": "PASS",
+      "ms": 2
+    },
+    {
+      "name": "Base isolation threshold r=sqrt(2) and relative/absolute response distinction",
+      "status": "PASS",
+      "ms": 0
+    },
+    {
+      "name": "Zero forcing and zero-frequency sine excitation do not generate motion",
+      "status": "PASS",
+      "ms": 0
+    },
+    {
+      "name": "UI parameter extremes remain finite and agree with RK4 at high frequency",
+      "status": "PASS",
+      "ms": 70
+    },
+    {
+      "name": "Validation rejects invalid input and executable strings",
+      "status": "PASS",
+      "ms": 1
+    },
+    {
+      "name": "Standalone build contains no external executable or asset dependency",
+      "status": "PASS",
+      "ms": 2
+    }
+  ],
+  "status": "PASS"
+}
