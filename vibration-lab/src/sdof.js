@@ -7,7 +7,7 @@
   else root.SDOF = factory(root.Vibration);
 })(typeof globalThis !== 'undefined' ? globalThis : this, function(Core) {
   'use strict';
-  const VERSION = '1.0.1', { expm, mv } = Core.matrix;
+  const VERSION = '1.0.2', { expm, mv } = Core.matrix;
   const MODES = ['free', 'damped', 'forced', 'unbalance', 'base', 'periodic', 'arbitrary'];
   const DEFAULTS = { ...Core.DEFAULTS, phi: 0, mu: .1, eccentricity: .02, wave: 'square', harmonics: 9, load: 'step', tau: .4, delay: .5, J: .4, response: 'full', baseInput: 'displacement', Ag: 1, csv: '0,0\n0.5,0\n1,4\n1.5,-2\n2,0\n12,0' };
   const LIMITS = { ...Core.LIMITS, phi: [-180, 180], mu: [0, .5], eccentricity: [0, .1], harmonics: [1, 21], tau: [.02, 20], delay: [0, 20], J: [-5, 5], Ag: [0, 10] };

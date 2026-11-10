@@ -2,6 +2,7 @@
 (function () {
   'use strict';
   const V = SDOF, $ = id => document.getElementById(id);
+  const spectra = new Map();
   const info = {
     free: ['实验 01', '无阻尼自由振动', 'm ẍ + k x = 0', '质量加倍后，周期会加倍吗？', '先保留当前曲线，再将质量 m 加倍。用时间轴比较相邻波峰：Tₙ = 2π√(m/k)，周期变为原来的 √2 倍。'],
     damped: ['实验 02', '有阻尼自由振动', 'm ẍ + c ẋ + k x = 0', '阻尼越大，回到平衡就一定越快吗？', '将 ζ 依次设为 0.08、1 和 2，并保留曲线比较。欠阻尼存在振荡；临界与过阻尼没有周期振荡。注意：有初速度时，非振荡响应也可能穿过零点一次。'],
@@ -49,6 +50,7 @@
     }
   }
   function rebuild() {
+    spectra.clear();
     setRunning(false); t = 0; sys = V.system(p); p = sys.p;
     // Aim for 100 samples per fastest oscillation; cap the display/export grid
     // at 24000 intervals. Direct readouts remain independent of this grid.
@@ -101,6 +103,10 @@
   }
   function changeMode(mode, extra = {}) { p = { ...p, mode, ...extra }; buildFields(); rebuild(); }
   function updateChartTabs() {
+    const spectrumTab = document.querySelector('[data-chart="spectrum"]');
+    spectrumTab.hidden = p.mode !== 'arbitrary';
+    if (spectrumTab.hidden && chartType === 'spectrum') chartType = 'time';
+    $('spectrumControls').hidden = chartType !== 'spectrum';
     document.querySelectorAll('[data-chart]').forEach(b => b.setAttribute('aria-selected', b.dataset.chart === chartType));
     $('quantity').hidden = chartType !== 'time';
     $('freqKind').hidden = !['frequency','phaseFrequency'].includes(chartType);
@@ -168,6 +174,28 @@
       [ymin, ymax] = range(points.map(a => a.energy)); ymin = 0;
       $('legend').innerHTML = '<span>机械能 E</span><span class="orange">动能 K</span><span class="blue">势能 V</span>';
       $('chartNote').textContent = p.mode === 'base' ? 'K = ½mẋ²，V = ½ku²。移动支座会输入或带走能量；本图不叠加对照。' : 'K = ½mv²，V = ½kx²，E = K + V。有阻尼自由振动满足 dE/dt = −cv²；本图不叠加对照。';
+    } else if (chartType === 'spectrum') {
+      const key = $('spectrumSignal').value;
+      const labels = { force: ['输入力', 'N'], x: ['位移响应', 'm'], v: ['速度响应', 'm/s'], a: ['加速度响应', 'm/s²'] };
+      const idealImpulse = p.load === 'impulse' && (key === 'force' || key === 'a');
+      if (!spectra.has(key)) {
+        const impulse = idealImpulse ? { time: p.delay, area: key === 'force' ? p.J : p.J / p.m } : undefined;
+        spectra.set(key, amplitudeSpectrum(time => sys.at(time)[key], p.duration, 8192, impulse));
+      }
+      const bins = spectra.get(key);
+      const nyquist = bins.at(-1)[0];
+      const upper = Number($('spectrumLimit').value);
+      xmax = Math.min(nyquist, Math.max(1 / p.duration, upper > 0 ? upper : Math.max(10, 5 * sys.d.fn)));
+      const visible = bins.slice(0, Math.floor(xmax * p.duration) + 1);
+      ymin = 0;
+      ymax = visible.reduce((max, bin) => Math.max(max, bin[1]), 0) * 1.1 || 1;
+      xLabel = 'f / Hz';
+      yLabel = '幅值 / ' + labels[key][1];
+      series.push({ pts: visible, color: colors.teal });
+      $('chartTitle').textContent = labels[key][0] + '频谱';
+      $('legend').textContent = '单边幅值';
+      $('chartNote').textContent = '整段时程 · Hann 窗 · 频率间隔 ' + fmt(1 / p.duration, 3) + ' Hz · 奈奎斯特频率 ' + fmt(nyquist, 1) + ' Hz。' +
+        (idealImpulse ? '已计入理想冲量项；Hann 窗会衰减靠近记录两端的冲量。' : '');
     } else if(chartType==='input') {
       const base=p.mode==='base', acc=base&&p.baseInput==='acceleration', impulse=p.mode==='arbitrary'&&p.load==='impulse';
       const key=base?(acc?'ya':'y'):'force'; yLabel=impulse?'J / (N·s)':base?(acc?'ÿ / (m/s²)':'y / m'):'F / N';
@@ -225,6 +253,8 @@
   document.querySelectorAll('[data-mode]').forEach(b => b.addEventListener('click', () => changeMode(b.dataset.mode, b.dataset.mode === 'free' ? { zeta: 0 } : p.zeta === 0 ? { zeta: .08 } : {})));
   document.querySelectorAll('[data-chart]').forEach(b => b.addEventListener('click', () => { chartType = b.dataset.chart; updateChartTabs(); render(); }));
   $('quantity').addEventListener('change', render);
+  $('spectrumSignal').addEventListener('change', render);
+  $('spectrumLimit').addEventListener('change', render);
   $('freqKind').addEventListener('change',render);
   $('components').addEventListener('change',render);
   $('response').addEventListener('change',e=>{p.response=e.target.value;rebuild();});
@@ -245,7 +275,7 @@
   });
   $('exportCSV').addEventListener('click', () => {
     const keys = ['t','x','v','a','u','uv','ua','y','yv','ya','force','effectiveForce','Ft','kinetic','potential','energy','dampingPower','inputPower','steadyX','steadyV','steadyA','transientX','transientV','transientA'];
-    const metadata = '# Vibration Lab v1.0.1; SI units; ' + JSON.stringify(p) + '\r\n';
+    const metadata = '# Vibration Lab v1.0.2; SI units; ' + JSON.stringify(p) + '\r\n';
     const header = 't_s,x_m,v_m_s,a_m_s2,u_m,uv_m_s,ua_m_s2,y_m,yv_m_s,ya_m_s2,external_force_N,effective_force_N,transmitted_force_N,kinetic_J,potential_J,energy_J,damping_power_W,input_power_W,steady_x_m,steady_v_m_s,steady_a_m_s2,transient_x_m,transient_v_m_s,transient_a_m_s2';
     download('vibration-' + p.mode + '.csv', '\uFEFF' + metadata + header + '\r\n' + points.map(s => keys.map(k => s[k]===null?'':s[k].toPrecision(12)).join(',')).join('\r\n'), 'text/csv;charset=utf-8');
   });

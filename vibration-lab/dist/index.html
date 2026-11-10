@@ -38,11 +38,11 @@ main > .modes{margin-top:24px}
 <div class="transport"><button id="play" class="primary">▶ 开始实验</button><button id="restart" class="outline" aria-label="回到零时刻">↺ 重来</button><button id="step" class="outline">单步</button><label class="speed-label">速度<select id="speed" aria-label="播放速度"><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label><a class="mobile-jump" href="#parameters">调参数 ↓</a></div>
 <div class="timeline"><input id="scrub" type="range" min="0" max="12" step="0.001" value="0" aria-label="实验时间"><div><span>0 s</span><span>拖动时间轴，逐帧观察</span><span id="endTime">12 s</span></div></div>
 <div class="readouts"><div><span>位移 x <small>m</small></span><strong id="readX">0.0800</strong></div><div><span>速度 v <small>m/s</small></span><strong id="readV">0.0000</strong></div><div><span>加速度 a <small>m/s²</small></span><strong id="readA">−8.0000</strong></div><div><span id="fourthLabel">机械能 E <small>J</small></span><strong id="readE">0.3200</strong></div></div></div>
-<div class="panel chart-panel"><div class="chart-toolbar"><div class="chart-tabs" role="tablist" aria-label="图表类型"><button role="tab" aria-selected="true" data-chart="time">时程</button><button role="tab" aria-selected="false" data-chart="phase">相图</button><button role="tab" aria-selected="false" data-chart="energy">能量</button><button role="tab" aria-selected="false" data-chart="input">激励</button><button role="tab" aria-selected="false" data-chart="frequency">幅频</button><button role="tab" aria-selected="false" data-chart="phaseFrequency">相频</button></div><select id="quantity" aria-label="时程物理量"><option value="x">位移 x / m</option><option value="v">速度 v / (m/s)</option><option value="a">加速度 a / (m/s²)</option><option value="u">相对位移 u / m</option><option value="Ft">传递力 Fₜ / N</option></select><select id="freqKind" aria-label="频响类型" hidden><option value="displacement">位移响应</option><option value="transmission">力/位移传递率</option></select></div><div class="chart-header"><h3 id="chartTitle">位移时程</h3><div id="legend" class="legend"></div></div><canvas id="chart" role="img" aria-label="当前实验曲线，精确数据可通过导出CSV读取"></canvas><p id="chartNote" class="muted compact"></p><div class="chart-actions"><button id="exportCSV" class="text-btn">↓ 导出数据 CSV</button><button id="exportConfig" class="text-btn">↓ 保存参数</button><button id="importConfig" class="text-btn">↑ 载入参数</button><input id="configFile" type="file" accept=".json,application/json" hidden><span id="exportNote" role="status"></span></div></div>
+<div class="panel chart-panel"><div class="chart-toolbar"><div class="chart-tabs" role="tablist" aria-label="图表类型"><button role="tab" aria-selected="true" data-chart="time">时程</button><button role="tab" aria-selected="false" data-chart="phase">相图</button><button role="tab" aria-selected="false" data-chart="energy">能量</button><button role="tab" aria-selected="false" data-chart="input">激励</button><button role="tab" aria-selected="false" data-chart="frequency">幅频</button><button role="tab" aria-selected="false" data-chart="phaseFrequency">相频</button><button role="tab" aria-selected="false" data-chart="spectrum" hidden>频谱</button></div><select id="quantity" aria-label="时程物理量"><option value="x">位移 x / m</option><option value="v">速度 v / (m/s)</option><option value="a">加速度 a / (m/s²)</option><option value="u">相对位移 u / m</option><option value="Ft">传递力 Fₜ / N</option></select><select id="freqKind" aria-label="频响类型" hidden><option value="displacement">位移响应</option><option value="transmission">力/位移传递率</option></select><div id="spectrumControls" hidden><select id="spectrumSignal" aria-label="频谱物理量"><option value="force">输入力</option><option value="x" selected>位移</option><option value="v">速度</option><option value="a">加速度</option></select> <label>上限 Hz <input id="spectrumLimit" type="number" min="0" step="any" placeholder="自动" style="width:5em"></label></div></div><div class="chart-header"><h3 id="chartTitle">位移时程</h3><div id="legend" class="legend"></div></div><canvas id="chart" role="img" aria-label="当前实验曲线，精确数据可通过导出CSV读取"></canvas><p id="chartNote" class="muted compact"></p><div class="chart-actions"><button id="exportCSV" class="text-btn">↓ 导出数据 CSV</button><button id="exportConfig" class="text-btn">↓ 保存参数</button><button id="importConfig" class="text-btn">↑ 载入参数</button><input id="configFile" type="file" accept=".json,application/json" hidden><span id="exportNote" role="status"></span></div></div>
 </section>
 <section class="knowledge"><div class="panel facts"><div class="panel-heading"><h2>系统特性与公式</h2></div><div id="metrics" class="metrics"></div><div class="equation" id="equation"></div><p id="coordinateNote" class="muted"></p><div class="insight"><span>观察任务</span><h3 id="taskTitle"></h3><p id="taskText"></p></div><details><summary>公式、假设与适用范围</summary><div id="theory"></div><p>线性弹簧、集中质量、黏性阻尼；位移从静平衡位置量起，重力静位移已消去。运动动画自动缩放，物理计算与图表不截断。频响曲线表示谐波特解；ζ &gt; 0 时瞬态消失后趋于该解。</p></details><details class="damping-tool"><summary>阻尼识别 · 对数减量法</summary><p>用于欠阻尼自由衰减；输入去除平衡偏移后的两个同向峰值幅值。</p><div class="identify-fields"><label>A₁ / m<input id="peak1" type="number" value="0.08" min="0" step="0.001"></label><label>A₂ / m<input id="peak2" type="number" value="0.048" min="0" step="0.001"></label><label>时间间隔 / s<input id="peakTime" type="number" value="0.63" min="0" step="0.01"></label><label>相隔周期数<input id="peakCycles" type="number" value="1" min="1" step="1"></label></div><button id="identify" class="outline">计算阻尼比</button><p id="identifyResult" role="status"></p><p id="dampingValues"></p></details></div></section>
 </div>
-<footer><span>振动力学 · v1.0.1 · MIT 开源</span><span id="checkStatus">正在检查计算内核…</span><button class="text-btn" id="aboutBtn">参考与版本说明 ↗</button></footer>
+<footer><span>振动力学 · v1.0.2 · MIT 开源</span><span id="checkStatus">正在检查计算内核…</span><button class="text-btn" id="aboutBtn">参考与版本说明 ↗</button></footer>
 </main>
 <dialog id="helpDialog"><button class="close-dialog" aria-label="关闭说明">×</button><h2>使用说明</h2><ol><li>选择上方实验，再调整质量、刚度和初始条件。</li><li>点击「开始实验」，或拖动时间轴查看任意时刻。</li><li>切换时程、相图、能量、激励、幅频和相频。简谐或周期实验可选择全响应、稳态并叠加分量。</li><li>保留当前曲线，修改参数后比较同一物理量。</li><li>导出 CSV 进行计算，保存参数 JSON 可复现实验设置。</li></ol><p>本文件无需联网。电脑双击 HTML，用浏览器打开；手机请下载后使用支持本地 HTML 的浏览器打开。</p><p>单步前进 0.02 s；修改参数自动暂停并归零。图中淡线为整个实验的预览，深色线为已播放的部分。切换页面标签或进入后台时自动暂停。</p><p>网页可用键盘操作；图表精确值见下方读数或 CSV。建议在横屏下查看更多曲线细节。</p></dialog>
 <dialog id="aboutDialog"><button class="close-dialog" aria-label="关闭版本说明">×</button><h2>版本说明</h2><p>原创界面与计算实现。无外部字体、图表库、登录或网络请求。源代码按计算、界面和样式拆分，通过构建脚本生成这一个 HTML。</p><h3>参考的教学方法</h3><ul><li><a href="https://phet.colorado.edu/en/simulations/masses-and-springs" target="_blank" rel="noopener">PhET · Masses and Springs</a>：以可调参数、运动和能量帮助建立直觉。</li><li><a href="https://www.myphysicslab.com/springs/single-spring-en.html" target="_blank" rel="noopener">myPhysicsLab · Single Spring</a>：将弹簧模型、时程与相图联系起来。</li><li><a href="https://sd-iiith.vlabs.ac.in/exp/forced-vibration/procedure.html" target="_blank" rel="noopener">Virtual Labs · Forced Vibration</a>：用控制变量和频率比探究共振。</li><li><a href="https://www.sy.uestc.edu.cn/article/doi/10.12179/1672-4550.20240184?viewType=HTML" target="_blank" rel="noopener">《力学理论课程的互动虚拟实验平台建设与实践》</a>：参考按课程知识点组织实验、连接公式和现象的思路。</li></ul><p>仅借鉴教学方法，未复用上述平台的代码、图片或界面素材。详细验证方法与扩展说明见源码包 README。1.0.1 增加旋转不平衡、周期激励、任意荷载、响应分解、相频及阻尼识别。适用线性、定常、黏性阻尼单自由度模型；非线性刚度、干摩擦、碰撞和随机振动统计不在本版范围内。</p><p id="selfCheckDetail"></p></dialog>
@@ -157,7 +157,7 @@ main > .modes{margin-top:24px}
   else root.SDOF = factory(root.Vibration);
 })(typeof globalThis !== 'undefined' ? globalThis : this, function(Core) {
   'use strict';
-  const VERSION = '1.0.1', { expm, mv } = Core.matrix;
+  const VERSION = '1.0.2', { expm, mv } = Core.matrix;
   const MODES = ['free', 'damped', 'forced', 'unbalance', 'base', 'periodic', 'arbitrary'];
   const DEFAULTS = { ...Core.DEFAULTS, phi: 0, mu: .1, eccentricity: .02, wave: 'square', harmonics: 9, load: 'step', tau: .4, delay: .5, J: .4, response: 'full', baseInput: 'displacement', Ag: 1, csv: '0,0\n0.5,0\n1,4\n1.5,-2\n2,0\n12,0' };
   const LIMITS = { ...Core.LIMITS, phi: [-180, 180], mu: [0, .5], eccentricity: [0, .1], harmonics: [1, 21], tau: [.02, 20], delay: [0, 20], J: [-5, 5], Ag: [0, 10] };
@@ -358,10 +358,59 @@ main > .modes{margin-top:24px}
 
 </script>
 <script>
+/* Single-sided amplitude spectrum of a uniformly sampled, Hann-windowed record. */
+(function (root) {
+  'use strict';
+  function spectrum(sample, duration, size = 8192, impulse) {
+    const real = new Float64Array(size);
+    const imag = new Float64Array(size);
+    const dt = duration / size;
+    const hann = fraction => 0.5 * (1 - Math.cos(2 * Math.PI * fraction));
+    for (let i = 0; i < size; i++) real[i] = sample(i * dt) * hann(i / size);
+
+    for (let i = 1, j = 0; i < size; i++) {
+      let bit = size >> 1;
+      while (j & bit) { j ^= bit; bit >>= 1; }
+      j ^= bit;
+      if (i < j) [real[i], real[j]] = [real[j], real[i]];
+    }
+    for (let width = 2; width <= size; width *= 2) {
+      const half = width / 2;
+      for (let j = 0; j < half; j++) {
+        const angle = -2 * Math.PI * j / width;
+        const cos = Math.cos(angle), sin = Math.sin(angle);
+        for (let i = j; i < size; i += width) {
+          const k = i + half;
+          const re = cos * real[k] - sin * imag[k];
+          const im = sin * real[k] + cos * imag[k];
+          real[k] = real[i] - re;
+          imag[k] = imag[i] - im;
+          real[i] += re;
+          imag[i] += im;
+        }
+      }
+    }
+    // A Dirac term contributes its area times the window at the event.
+    const eventArea = impulse && impulse.time >= 0 && impulse.time < duration
+      ? impulse.area * hann(impulse.time / duration) / dt : 0;
+    return Array.from({ length: size / 2 + 1 }, (_, k) => {
+      const frequency = k / duration;
+      const angle = eventArea ? -2 * Math.PI * frequency * impulse.time : 0;
+      const amplitude = Math.hypot(real[k] + eventArea * Math.cos(angle), imag[k] + eventArea * Math.sin(angle));
+      return [frequency, amplitude * (k === 0 || k === size / 2 ? 2 : 4) / size];
+    });
+  }
+  if (typeof module === 'object' && module.exports) module.exports = spectrum;
+  else root.amplitudeSpectrum = spectrum;
+})(globalThis);
+
+</script>
+<script>
 /* UI only. All physical values come from physics.js, independent of rendering FPS. */
 (function () {
   'use strict';
   const V = SDOF, $ = id => document.getElementById(id);
+  const spectra = new Map();
   const info = {
     free: ['实验 01', '无阻尼自由振动', 'm ẍ + k x = 0', '质量加倍后，周期会加倍吗？', '先保留当前曲线，再将质量 m 加倍。用时间轴比较相邻波峰：Tₙ = 2π√(m/k)，周期变为原来的 √2 倍。'],
     damped: ['实验 02', '有阻尼自由振动', 'm ẍ + c ẋ + k x = 0', '阻尼越大，回到平衡就一定越快吗？', '将 ζ 依次设为 0.08、1 和 2，并保留曲线比较。欠阻尼存在振荡；临界与过阻尼没有周期振荡。注意：有初速度时，非振荡响应也可能穿过零点一次。'],
@@ -409,6 +458,7 @@ main > .modes{margin-top:24px}
     }
   }
   function rebuild() {
+    spectra.clear();
     setRunning(false); t = 0; sys = V.system(p); p = sys.p;
     // Aim for 100 samples per fastest oscillation; cap the display/export grid
     // at 24000 intervals. Direct readouts remain independent of this grid.
@@ -461,6 +511,10 @@ main > .modes{margin-top:24px}
   }
   function changeMode(mode, extra = {}) { p = { ...p, mode, ...extra }; buildFields(); rebuild(); }
   function updateChartTabs() {
+    const spectrumTab = document.querySelector('[data-chart="spectrum"]');
+    spectrumTab.hidden = p.mode !== 'arbitrary';
+    if (spectrumTab.hidden && chartType === 'spectrum') chartType = 'time';
+    $('spectrumControls').hidden = chartType !== 'spectrum';
     document.querySelectorAll('[data-chart]').forEach(b => b.setAttribute('aria-selected', b.dataset.chart === chartType));
     $('quantity').hidden = chartType !== 'time';
     $('freqKind').hidden = !['frequency','phaseFrequency'].includes(chartType);
@@ -528,6 +582,28 @@ main > .modes{margin-top:24px}
       [ymin, ymax] = range(points.map(a => a.energy)); ymin = 0;
       $('legend').innerHTML = '<span>机械能 E</span><span class="orange">动能 K</span><span class="blue">势能 V</span>';
       $('chartNote').textContent = p.mode === 'base' ? 'K = ½mẋ²，V = ½ku²。移动支座会输入或带走能量；本图不叠加对照。' : 'K = ½mv²，V = ½kx²，E = K + V。有阻尼自由振动满足 dE/dt = −cv²；本图不叠加对照。';
+    } else if (chartType === 'spectrum') {
+      const key = $('spectrumSignal').value;
+      const labels = { force: ['输入力', 'N'], x: ['位移响应', 'm'], v: ['速度响应', 'm/s'], a: ['加速度响应', 'm/s²'] };
+      const idealImpulse = p.load === 'impulse' && (key === 'force' || key === 'a');
+      if (!spectra.has(key)) {
+        const impulse = idealImpulse ? { time: p.delay, area: key === 'force' ? p.J : p.J / p.m } : undefined;
+        spectra.set(key, amplitudeSpectrum(time => sys.at(time)[key], p.duration, 8192, impulse));
+      }
+      const bins = spectra.get(key);
+      const nyquist = bins.at(-1)[0];
+      const upper = Number($('spectrumLimit').value);
+      xmax = Math.min(nyquist, Math.max(1 / p.duration, upper > 0 ? upper : Math.max(10, 5 * sys.d.fn)));
+      const visible = bins.slice(0, Math.floor(xmax * p.duration) + 1);
+      ymin = 0;
+      ymax = visible.reduce((max, bin) => Math.max(max, bin[1]), 0) * 1.1 || 1;
+      xLabel = 'f / Hz';
+      yLabel = '幅值 / ' + labels[key][1];
+      series.push({ pts: visible, color: colors.teal });
+      $('chartTitle').textContent = labels[key][0] + '频谱';
+      $('legend').textContent = '单边幅值';
+      $('chartNote').textContent = '整段时程 · Hann 窗 · 频率间隔 ' + fmt(1 / p.duration, 3) + ' Hz · 奈奎斯特频率 ' + fmt(nyquist, 1) + ' Hz。' +
+        (idealImpulse ? '已计入理想冲量项；Hann 窗会衰减靠近记录两端的冲量。' : '');
     } else if(chartType==='input') {
       const base=p.mode==='base', acc=base&&p.baseInput==='acceleration', impulse=p.mode==='arbitrary'&&p.load==='impulse';
       const key=base?(acc?'ya':'y'):'force'; yLabel=impulse?'J / (N·s)':base?(acc?'ÿ / (m/s²)':'y / m'):'F / N';
@@ -585,6 +661,8 @@ main > .modes{margin-top:24px}
   document.querySelectorAll('[data-mode]').forEach(b => b.addEventListener('click', () => changeMode(b.dataset.mode, b.dataset.mode === 'free' ? { zeta: 0 } : p.zeta === 0 ? { zeta: .08 } : {})));
   document.querySelectorAll('[data-chart]').forEach(b => b.addEventListener('click', () => { chartType = b.dataset.chart; updateChartTabs(); render(); }));
   $('quantity').addEventListener('change', render);
+  $('spectrumSignal').addEventListener('change', render);
+  $('spectrumLimit').addEventListener('change', render);
   $('freqKind').addEventListener('change',render);
   $('components').addEventListener('change',render);
   $('response').addEventListener('change',e=>{p.response=e.target.value;rebuild();});
@@ -605,7 +683,7 @@ main > .modes{margin-top:24px}
   });
   $('exportCSV').addEventListener('click', () => {
     const keys = ['t','x','v','a','u','uv','ua','y','yv','ya','force','effectiveForce','Ft','kinetic','potential','energy','dampingPower','inputPower','steadyX','steadyV','steadyA','transientX','transientV','transientA'];
-    const metadata = '# Vibration Lab v1.0.1; SI units; ' + JSON.stringify(p) + '\r\n';
+    const metadata = '# Vibration Lab v1.0.2; SI units; ' + JSON.stringify(p) + '\r\n';
     const header = 't_s,x_m,v_m_s,a_m_s2,u_m,uv_m_s,ua_m_s2,y_m,yv_m_s,ya_m_s2,external_force_N,effective_force_N,transmitted_force_N,kinetic_J,potential_J,energy_J,damping_power_W,input_power_W,steady_x_m,steady_v_m_s,steady_a_m_s2,transient_x_m,transient_v_m_s,transient_a_m_s2';
     download('vibration-' + p.mode + '.csv', '\uFEFF' + metadata + header + '\r\n' + points.map(s => keys.map(k => s[k]===null?'':s[k].toPrecision(12)).join(',')).join('\r\n'), 'text/csv;charset=utf-8');
   });

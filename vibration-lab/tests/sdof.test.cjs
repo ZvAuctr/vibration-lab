@@ -151,7 +151,7 @@ test('Input parser rejects code, duplicate times, malformed data and unsupported
   assert.throws(()=>V.identify(.1,.2,1));assertions++;
 });
 test('Final file includes new engine, correct version and no slogan or chapter references',()=>{
-  const html=fs.readFileSync(path.join(__dirname,'../dist/index.html'),'utf8');ok(html.includes('v1.0.1'),'version');ok(html.includes('root.SDOF'),'bundled engine');ok(!/振动之间|教材|课本|让每一次/.test(html),'clean wording');
+  const html=fs.readFileSync(path.join(__dirname,'../dist/index.html'),'utf8');ok(html.includes('v'+V.VERSION),'version');ok(html.includes('root.SDOF'),'bundled engine');ok(!/振动之间|教材|课本|让每一次/.test(html),'clean wording');
 });
 const core=JSON.parse(fs.readFileSync(path.join(__dirname,'../VERIFICATION-core.json'),'utf8'));
 const report={version:V.VERSION,runUTC:new Date().toISOString(),node:process.version,coreSuites:core.suiteCount,extendedSuites:suites,totalSuites:core.suiteCount+suites,assertions:assertions+core.assertions,status:'PASS',coreResults:core.results,extendedResults:results};

@@ -1,6 +1,6 @@
 {
-  "version": "1.0.1",
-  "runUTC": "2026-10-28T13:20:43.159Z",
+  "version": "1.0.2",
+  "runUTC": "2026-11-10T09:36:42.498Z",
   "node": "v24.18.0",
   "coreSuites": 15,
   "extendedSuites": 20,
@@ -16,12 +16,12 @@
     {
       "name": "Closed-form free response across all damping regimes and near criticality",
       "status": "PASS",
-      "ms": 3
+      "ms": 7
     },
     {
       "name": "Undamped period, velocity, acceleration and conserved energy",
       "status": "PASS",
-      "ms": 9
+      "ms": 13
     },
     {
       "name": "Exact and near resonance agree with independent undamped closed form",
@@ -35,7 +35,7 @@
     {
       "name": "Independent RK4 cross-check in absolute coordinates, deterministic parameter grid",
       "status": "PASS",
-      "ms": 111
+      "ms": 99
     },
     {
       "metric": "RK4 halved-step x errors (m)",
@@ -58,17 +58,17 @@
     {
       "name": "Trajectory recurrence agrees with direct matrix exponential",
       "status": "PASS",
-      "ms": 15
+      "ms": 12
     },
     {
       "name": "Energy balance including viscous loss, external work and moving-support work",
       "status": "PASS",
-      "ms": 71
+      "ms": 50
     },
     {
       "name": "Frequency response matches initialized harmonic particular solution",
       "status": "PASS",
-      "ms": 3
+      "ms": 2
     },
     {
       "name": "Base isolation threshold r=sqrt(2) and relative/absolute response distinction",
@@ -83,24 +83,24 @@
     {
       "name": "UI parameter extremes remain finite and agree with RK4 at high frequency",
       "status": "PASS",
-      "ms": 83
+      "ms": 69
     },
     {
       "name": "Validation rejects invalid input and executable strings",
       "status": "PASS",
-      "ms": 1
+      "ms": 0
     },
     {
       "name": "Standalone build contains no external executable or asset dependency",
       "status": "PASS",
-      "ms": 5
+      "ms": 1
     }
   ],
   "extendedResults": [
     {
       "name": "v1.0.0 behavior preserved for all original experiments",
       "status": "PASS",
-      "ms": 24
+      "ms": 19
     },
     {
       "name": "Phase and base coordinate conversion preserve absolute initial conditions",
@@ -115,7 +115,7 @@
     {
       "name": "Harmonic full and steady responses agree with independent RK4 and phase relations",
       "status": "PASS",
-      "ms": 55
+      "ms": 41
     },
     {
       "name": "Transient component solves homogeneous equation; full equals steady plus transient",
@@ -125,12 +125,12 @@
     {
       "name": "Base displacement and acceleration equations verified independently",
       "status": "PASS",
-      "ms": 8
+      "ms": 7
     },
     {
       "name": "Periodic coefficients, finite Fourier loads and RK4 cross-check",
       "status": "PASS",
-      "ms": 45
+      "ms": 36
     },
     {
       "metric": "triangle Fourier displacement errors vs N=21",
@@ -142,12 +142,12 @@
     {
       "name": "Fourier truncation converges in damped response",
       "status": "PASS",
-      "ms": 1
+      "ms": 0
     },
     {
       "name": "Step, finite ramp, rectangular and triangular pulse closed forms",
       "status": "PASS",
-      "ms": 2
+      "ms": 1
     },
     {
       "name": "Ideal impulse has exact velocity and energy jump, including at t=0",
@@ -157,7 +157,7 @@
     {
       "name": "Half-sine pulse agrees with exact harmonic segment then free vibration",
       "status": "PASS",
-      "ms": 10
+      "ms": 6
     },
     {
       "name": "Non-grid impulse and pulse events are retained in exported trajectory",
@@ -167,17 +167,17 @@
     {
       "name": "CSV piecewise-linear load matches independent Duhamel quadrature",
       "status": "PASS",
-      "ms": 6
+      "ms": 5
     },
     {
       "name": "Linear chirp sampled load matches independent analytic-drive RK4",
       "status": "PASS",
-      "ms": 94
+      "ms": 74
     },
     {
       "name": "Energy balance for periodic, rotating and arbitrary loads; moving support work",
       "status": "PASS",
-      "ms": 284
+      "ms": 231
     },
     {
       "name": "Frequency transmission amplitude/phase and isolation threshold",
