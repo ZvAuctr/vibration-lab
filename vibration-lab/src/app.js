@@ -186,16 +186,26 @@
       const nyquist = bins.at(-1)[0];
       const upper = Number($('spectrumLimit').value);
       xmax = Math.min(nyquist, Math.max(1 / p.duration, upper > 0 ? upper : Math.max(10, 5 * sys.d.fn)));
-      const visible = bins.slice(0, Math.floor(xmax * p.duration) + 1);
+      let visible = bins.slice(0, Math.floor(xmax * p.duration) + 1);
+      const useDecibels = $('spectrumScale').value === 'db';
       ymin = 0;
       ymax = visible.reduce((max, bin) => Math.max(max, bin[1]), 0) * 1.1 || 1;
       xLabel = 'f / Hz';
       yLabel = '幅值 / ' + labels[key][1];
+      if (useDecibels) {
+        const peak = bins.reduce((max, bin) => Math.max(max, bin[1]), 0);
+        visible = visible.map(([frequency, amplitude]) =>
+          [frequency, peak > 0 ? Math.max(-80, 20 * Math.log10(amplitude / peak)) : NaN]);
+        ymin = -80;
+        ymax = 0;
+        yLabel = 'dB';
+      }
       series.push({ pts: visible, color: colors.teal });
       $('chartTitle').textContent = labels[key][0] + '频谱';
-      $('legend').textContent = '单边幅值';
+      $('legend').textContent = useDecibels ? '相对幅值' : '单边幅值';
       $('chartNote').textContent = '整段时程 · Hann 窗 · 频率间隔 ' + fmt(1 / p.duration, 3) + ' Hz · 奈奎斯特频率 ' + fmt(nyquist, 1) + ' Hz。' +
-        (idealImpulse ? '已计入理想冲量项；Hann 窗会衰减靠近记录两端的冲量。' : '');
+        (idealImpulse ? '已计入理想冲量项；Hann 窗会衰减靠近记录两端的冲量。' : '') +
+        (useDecibels ? (visible.some(bin => Number.isFinite(bin[1])) ? ' 以全频谱最大幅值为 0 dB，显示下限 −80 dB。' : ' 当前信号全为零，无法计算相对 dB。') : '');
     } else if(chartType==='input') {
       const base=p.mode==='base', acc=base&&p.baseInput==='acceleration', impulse=p.mode==='arbitrary'&&p.load==='impulse';
       const key=base?(acc?'ya':'y'):'force'; yLabel=impulse?'J / (N·s)':base?(acc?'ÿ / (m/s²)':'y / m'):'F / N';
@@ -254,6 +264,7 @@
   document.querySelectorAll('[data-chart]').forEach(b => b.addEventListener('click', () => { chartType = b.dataset.chart; updateChartTabs(); render(); }));
   $('quantity').addEventListener('change', render);
   $('spectrumSignal').addEventListener('change', render);
+  $('spectrumScale').addEventListener('change', render);
   $('spectrumLimit').addEventListener('change', render);
   $('freqKind').addEventListener('change',render);
   $('components').addEventListener('change',render);
