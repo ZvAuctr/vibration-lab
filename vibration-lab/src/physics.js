@@ -6,7 +6,7 @@
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   'use strict';
   const DEFAULTS = { mode: 'damped', m: 1, k: 100, zeta: 0.08, x0: 0.08, v0: 0, F: 4, Y: 0.02, r: 0.8, duration: 12 };
-  const LIMITS = { m: [0.1, 20], k: [1, 1000], zeta: [0, 3], x0: [-0.3, 0.3], v0: [-3, 3], F: [0, 30], Y: [0, 0.1], r: [0, 4], duration: [2, 60] };
+  const LIMITS = { m: [0.1, 2000], k: [1, 200000], zeta: [0, 100], x0: [-50, 50], v0: [-1000, 1000], F: [0, 30000], Y: [0, 50], r: [0, 300], duration: [2, 1200] };
   function validate(input) {
     const p = Object.assign({}, DEFAULTS, input);
     if (!['free', 'damped', 'forced', 'base'].includes(p.mode)) throw Error('未知实验类型');
@@ -60,7 +60,7 @@
         inputPower: base ? -p.k * u * yv - d.c * uv * yv : force * v };
     }
     function at(t) {
-      if (!Number.isFinite(t) || t < 0 || t > 60) throw Error('时间应在 0–60 s');
+      if (!Number.isFinite(t) || t < 0 || t > LIMITS.duration[1]) throw Error('时间应在 0–1200 s');
       return unpack(t, mv(expm(A, t), initial));
     }
     function trajectory(count = 2400) {

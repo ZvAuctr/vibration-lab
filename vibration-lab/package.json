@@ -1,9 +1,14 @@
 {
   "name": "vibration-lab",
-  "version": "1.0.2",
+  "version": "1.2.5",
   "private": true,
-  "description": "Offline, open-source single-degree-of-freedom vibration teaching lab",
+  "description": "Offline vibration teaching lab for single- and multi-degree-of-freedom systems",
   "license": "MIT",
-  "scripts": { "build": "node scripts/build.cjs", "test": "node tests/physics.test.cjs && node tests/sdof.test.cjs && node tests/spectrum.test.cjs" },
-  "engines": { "node": ">=18" }
+  "scripts": {
+    "build": "node scripts/build.cjs",
+    "test": "node tests/physics.test.cjs && node tests/sdof.test.cjs && node tests/spectrum.test.cjs && node tests/mdof.test.cjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
 }

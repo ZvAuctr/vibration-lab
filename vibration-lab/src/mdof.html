@@ -1,0 +1,76 @@
+<section id="multiWorkspace" class="mdof-workspace" aria-label="多自由度实验" hidden>
+  <aside class="panel mdof-controls">
+    <div class="panel-heading"><h2>实验参数</h2><button id="multiResetParams" class="text-btn">恢复默认</button></div>
+    <p class="muted compact">修改参数后从初始状态重新开始。</p>
+    <label>实验预设
+      <select id="multiPreset">
+        <option value="">默认</option>
+        <option value="free">释放所选质量块</option>
+        <option value="first">按一阶振型释放</option>
+        <option value="second">按二阶振型释放</option>
+        <option value="forced">简谐受迫振动</option>
+        <option value="anti">反共振</option>
+      </select>
+    </label>
+    <label>质量块数量<select id="multiCount"><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label>
+    <label>拉开并释放<select id="multiRelease"></select></label>
+    <label>施力位置<select id="multiDrive"></select></label>
+    <div id="multiFields"></div>
+  </aside>
+  <div class="mdof-main">
+    <section class="panel mdof-card">
+      <h2>系统运动</h2>
+      <canvas id="multiMotion" role="img" aria-label="质量块和弹簧链的运动示意"></canvas>
+      <div class="mdof-actions">
+        <button class="primary" id="multiPlay">开始</button>
+        <button class="outline" id="multiReset">回到起点</button>
+        <label>观察
+          <select id="multiView">
+            <option value="response">实际响应</option>
+            <option value="0">一阶振型</option>
+            <option value="1">二阶振型</option>
+          </select>
+        </label>
+        <output id="multiTime"></output>
+      </div>
+      <input id="multiSeek" type="range" min="0" step="0.001" value="0" aria-label="多自由度实验时间">
+      <p id="multiReadout"></p>
+    </section>
+    <section class="panel mdof-card">
+      <div class="mdof-actions">
+        <h2 id="multiChartTitle">位移时程</h2>
+        <select id="multiChartType" aria-label="多自由度图表">
+          <option value="time">位移时程</option>
+          <option value="modal">模态叠加</option>
+          <option value="frequency">幅频响应</option>
+        </select>
+      </div>
+      <div class="mdof-actions"><label>测量位置<select id="multiMeasure"></select></label><label id="multiFreqRange" hidden>频率上限 (Hz) <input id="multiFreqLimit" type="number" min="0.001" max="10000" step="any" placeholder="自动"></label></div>
+      <div id="multiLegend" class="mdof-actions"></div>
+      <canvas id="multiChart" role="img" aria-labelledby="multiChartTitle"></canvas>
+      <p class="muted compact" id="multiChartNote"></p>
+      <button class="text-btn" id="multiExport">↓ 导出当前图表数据 CSV</button>
+    </section>
+  </div>
+  <section class="panel facts mdof-facts" aria-labelledby="multiFactsTitle">
+    <h2 id="multiFactsTitle">系统特性与公式</h2>
+    <table class="mdof-modal-table" aria-label="各阶模态特性">
+      <thead><tr><th scope="col">阶次</th><th scope="col">固有频率<br>Hz</th><th scope="col">固有周期<br>s</th><th scope="col">阻尼频率<br>Hz</th></tr></thead>
+      <tbody id="multiModeMetrics"></tbody>
+    </table>
+    <p class="muted" id="multiDamping"></p>
+    <div class="equation">Mẍ + Cẋ + Kx = F(t)</div>
+    <p class="muted">各块位移从各自的静平衡位置量起，向右为正。简谐力作用于所选质量块。</p>
+    <details>
+      <summary>振型</summary>
+      <p>各分量按质量块顺序排列，每阶最大绝对值归一化为 1。</p>
+      <ul id="multiModes"></ul>
+    </details>
+    <details>
+      <summary>公式、假设与适用范围</summary>
+      <p>M 为对角质量矩阵。K 的对角项为对应质量块左右弹簧刚度之和，相邻非对角项为连接弹簧刚度的负值。</p>
+      <p>Kφᵢ = ωᵢ²Mφᵢ，fᵢ = ωᵢ/(2π)，Tᵢ = 1/fᵢ。各阶采用同一模态阻尼比 ζ。欠阻尼时，阻尼频率为 fᵢ√(1 − ζ²)。ζ ≥ 1 时没有振荡频率。</p>
+      <p>质量块沿水平方向运动，采用线性弹簧和黏性阻尼。两端弹簧的总刚度至少为 1 N/m。</p>
+    </details>
+  </section>
+</section>

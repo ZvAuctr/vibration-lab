@@ -142,8 +142,8 @@ test('UI parameter extremes remain finite and agree with RK4 at high frequency',
   }
 });
 test('Validation rejects invalid input and executable strings', () => {
-  for (const bad of [{ m: 0 }, { k: -1 }, { zeta: -1 }, { r: 5 }, { duration: Infinity }, { m: '1' }, { mode: '<script>' }, { x0: NaN }]) { assert.throws(() => V.system(bad)); assertions++; }
-  assert.throws(() => V.system({}).at(-1)); assert.throws(() => V.system({}).at(61)); assertions += 2;
+  for (const bad of [{ m: 0 }, { k: -1 }, { zeta: -1 }, { r: 301 }, { duration: Infinity }, { m: '1' }, { mode: '<script>' }, { x0: NaN }]) { assert.throws(() => V.system(bad)); assertions++; }
+  assert.throws(() => V.system({}).at(-1)); assert.throws(() => V.system({}).at(1201)); assertions += 2;
 });
 test('Standalone build contains no external executable or asset dependency', () => {
   const html = fs.readFileSync(path.join(__dirname, '../dist/index.html'), 'utf8');

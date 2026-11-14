@@ -146,8 +146,8 @@ test('Zero forcing, exact resonance and parameter extremes remain finite',()=>{
   for(const mode of V.MODES){const s=V.system({mode,m:.1,k:1000,zeta:3,r:4,harmonics:21,wave:'sawtooth',load:'rectangle',x0:.3,v0:3,duration:60});for(const t of [0,.03,2,60])for(const val of Object.values(s.at(t)))if(val!==null)ok(Number.isFinite(val),'finite extreme '+mode);}
 });
 test('Input parser rejects code, duplicate times, malformed data and unsupported models',()=>{
-  for(const text of ['0,0\n0,1','1,0\n2,1','0,0\n1,NaN','0,0\n61,1','0,0\n1,eval(1)','0,0,0\n1,1']){assert.throws(()=>V.parseLoad(text));assertions++;}
-  for(const params of [{harmonics:2.5},{mode:'nonlinear'},{phi:181},{response:'eval()'},{baseInput:'random'},{load:'unknown'}]){assert.throws(()=>V.system(params));assertions++;}
+  for(const text of ['0,0\n0,1','1,0\n2,1','0,0\n1,NaN','0,0\n1201,1','0,0\n1,eval(1)','0,0,0\n1,1']){assert.throws(()=>V.parseLoad(text));assertions++;}
+  for(const params of [{harmonics:2.5},{mode:'nonlinear'},{phi:36001},{response:'eval()'},{baseInput:'random'},{load:'unknown'}]){assert.throws(()=>V.system(params));assertions++;}
   assert.throws(()=>V.identify(.1,.2,1));assertions++;
 });
 test('Final file includes new engine, correct version and no slogan or chapter references',()=>{

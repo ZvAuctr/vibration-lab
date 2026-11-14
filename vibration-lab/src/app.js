@@ -4,13 +4,13 @@
   const V = SDOF, $ = id => document.getElementById(id);
   const spectra = new Map();
   const info = {
-    free: ['实验 01', '无阻尼自由振动', 'm ẍ + k x = 0', '质量加倍后，周期会加倍吗？', '先保留当前曲线，再将质量 m 加倍。用时间轴比较相邻波峰：Tₙ = 2π√(m/k)，周期变为原来的 √2 倍。'],
-    damped: ['实验 02', '有阻尼自由振动', 'm ẍ + c ẋ + k x = 0', '阻尼越大，回到平衡就一定越快吗？', '将 ζ 依次设为 0.08、1 和 2，并保留曲线比较。欠阻尼存在振荡；临界与过阻尼没有周期振荡。注意：有初速度时，非振荡响应也可能穿过零点一次。'],
-    forced: ['实验 03', '简谐受迫振动', 'm ẍ + c ẋ + k x = F₀ sin(ωt)', '共振时，曲线会一直长大吗？', '选择“无阻尼共振”，观察增长的包络；再增大 ζ，比较稳态振幅。无阻尼非共振时自由振动分量不会消失，近频可出现拍振。'],
-    unbalance: ['实验 04', '旋转不平衡质量激励', 'm ẍ + c ẋ + k x = mₑ e ω² sin(ωt + θ)', '转速加倍，激励力会变成几倍？', '总支承质量 m 包括不平衡质量 mₑ。保持质量比 μ 和偏心距 e，改变 r。激励力幅按 ω² 改变；高频位移幅趋向 μe。'],
-    periodic: ['实验 06', '周期激励', 'm ẍ + c ẋ + k x = Σ Fₙ sin(nωt + nθ)', '基频没有共振，高阶谐波会共振吗？', '选择方波并令 r = 1/3、ζ = 0。第三阶谐波位于固有频率，即使基频远离共振，也会产生持续增长。增大最高阶数比较傅里叶截断效果。'],
-    arbitrary: ['实验 07', '任意激励', 'm ẍ + c ẋ + k x = F(t)', '荷载停止以后，系统为什么还在振动？', '比较阶跃、矩形脉冲、半正弦脉冲和瞬时冲量。切换激励图观察输入，荷载撤去后系统以结束时的位移和速度继续自由振动。自定义 CSV 支持任意分段线性力时程。'],
-    base: ['实验 05', '基础运动激励', 'm ü + c u̇ + k u = −m ÿ', '什么时候运动能被隔离？', '选择基础隔振情景，切换幅频图。对于绝对位移传递率 X/Y，r > √2 时小于 1；高频区增大阻尼可能增加传递。u = x − y，绝对位移 x 与弹簧变形 u 不相同。']
+    free: ['实验 01', '无阻尼自由振动', 'm ẍ + k x = 0'],
+    damped: ['实验 02', '有阻尼自由振动', 'm ẍ + c ẋ + k x = 0'],
+    forced: ['实验 03', '简谐受迫振动', 'm ẍ + c ẋ + k x = F₀ sin(ωt)'],
+    unbalance: ['实验 04', '旋转不平衡质量激励', 'm ẍ + c ẋ + k x = mₑ e ω² sin(ωt + θ)'],
+    periodic: ['实验 06', '周期激励', 'm ẍ + c ẋ + k x = Σ Fₙ sin(nωt + nθ)'],
+    arbitrary: ['实验 07', '任意激励', 'm ẍ + c ẋ + k x = F(t)'],
+    base: ['实验 05', '基础运动激励', 'm ü + c u̇ + k u = −m ÿ']
   };
   const defs = {
     m: ['质量 m', 'kg', 0.1], k: ['刚度 k', 'N/m', 1], zeta: ['阻尼比 ζ', '—', 0.01],
@@ -42,24 +42,31 @@
           p[key] = n; $('s-' + key).value = n; rebuild();
         }
       });
-      $('n-' + key).addEventListener('change', e => {
-        const n = Number(e.target.value), [lo, hi] = V.LIMITS[key];
-        if (e.target.value.trim() === '' || !Number.isFinite(n) || n < lo || n > hi || (key === 'harmonics' && !Number.isInteger(n))) { e.target.value = p[key]; notify(`请输入 ${lo} 至 ${hi} 之间的${key === 'harmonics' ? '整数' : '数值'}`); return; }
-        if (p[key] !== n) { p[key] = n; $('s-' + key).value = n; rebuild(); }
-      });
+      const input = $('n-' + key);
+      input.addEventListener('keydown', event => { if (event.key === 'Enter') input.blur(); });
+      const commit = () => {
+        const entered = input.valueAsNumber, [lo, hi] = V.LIMITS[key];
+        const bounded = Math.max(lo, Math.min(hi, entered));
+        const n = Number.isFinite(entered) ? (key === 'harmonics' ? Math.round(bounded) : bounded) : p[key];
+        input.value = n;
+        $('s-' + key).value = n;
+        if (p[key] !== n) { p[key] = n; rebuild(); }
+      };
+      input.addEventListener('blur', commit);
+      input.addEventListener('change', commit);
     }
   }
   function rebuild() {
     spectra.clear();
     setRunning(false); t = 0; sys = V.system(p); p = sys.p;
     // Aim for 100 samples per fastest oscillation; cap the display/export grid
-    // at 24000 intervals. Direct readouts remain independent of this grid.
-    points = sys.trajectory(Math.min(16000, Math.max(1800, Math.ceil(p.duration * Math.max(sys.d.wn, sys.d.omega * (p.mode === 'periodic' ? p.harmonics : 1)) * 16))));
+    // at 16000 intervals. Direct readouts remain independent of this grid.
+    points = sys.trajectory(Math.min(p.mode === 'periodic' ? Math.max(1800, Math.floor(800000 / Math.max(1,sys.harmonics.length))) : 16000, Math.max(1800, Math.ceil(p.duration * Math.max(sys.d.wn, sys.d.omega * (p.mode === 'periodic' ? p.harmonics : 1)) * 16))));
     visualPeak = points.reduce((peak, a) => Math.max(peak, Math.abs(a.x)), Math.max(.04, p.mode === 'base' ? p.Y * 1.6 : 0));
     visualForcePeak = points.reduce((peak, a) => Math.max(peak, Math.abs(a.force)), 1e-12);
     $('scrub').max = p.duration; $('scrub').value = 0; $('endTime').textContent = p.duration + ' s';
     document.querySelectorAll('[data-mode]').forEach(b => { b.classList.toggle('active', b.dataset.mode === p.mode); b.setAttribute('aria-pressed', b.dataset.mode === p.mode); });
-    const data = info[p.mode]; $('experimentId').textContent = data[0]; $('experimentTitle').textContent = data[1]; $('equation').textContent = data[2]; $('taskTitle').textContent = data[3]; $('taskText').textContent = data[4];
+    const data = info[p.mode]; $('experimentId').textContent = data[0]; $('experimentTitle').textContent = data[1]; $('equation').textContent = data[2];
     $('regime').textContent = sys.d.regime;
     const base = p.mode === 'base', baseAcc=base && p.baseInput==='acceleration', harmonic=sys.supportsSteady;
     $('damperGroup').style.opacity = p.zeta === 0 ? '0.22' : '1';
@@ -93,7 +100,6 @@
       arbitrary:'<p>全响应 x(t)=x<sub>自由</sub>(t)+∫₀ᵗh(t−τ)F(τ)dτ。欠阻尼 h(t)=e<sup>−ζωₙt</sup>sin(ωdt)/(mωd)；临界 h(t)=t e<sup>−ωₙt</sup>/m。计算以等价状态空间推进实现卷积。</p><p>阶跃 F·H(t−t₀)；斜坡在 τ 内从 0 升到 F 并保持；矩形/三角/半正弦脉冲在 τ 后归零。理想冲量令 x 连续，v(t₀⁺)=v(t₀⁻)+J/m。无阻尼零初始条件阶跃最大位移为 2F/k。</p>'
     };
     $('theory').innerHTML=common+theories[p.mode]+'<p>无阻尼精确共振且激励非零时没有有界稳态；r=0 表示零频率，正弦与初相位共同决定是否成为常值输入。频响端点表示低频极限。</p>';
-    $('dampingValues').textContent=sys.damping.delta===null?'当前参数不满足 0<ζ<1 的对数减量法条件。':'当前模型理论值：δ='+fmt(sys.damping.delta,4)+'，Td='+fmt(sys.damping.Td,4)+' s。';
     updateComparison(); updateChartTabs(); render();
   }
   function updateComparison() {
@@ -101,7 +107,7 @@
     $('compare').textContent = comparison ? '↻ 用当前参数替换对照' : '＋ 保留当前曲线作对照';
     $('compareInfo').textContent = comparison ? `对照：${info[comparison.p.mode][0].split(' · ')[0]}，m=${comparison.p.m}，k=${comparison.p.k}，ζ=${comparison.p.zeta}；${comparison.p.duration} s。` : '';
   }
-  function changeMode(mode, extra = {}) { p = { ...p, mode, ...extra }; buildFields(); rebuild(); }
+  function changeMode(mode, extra = {}) { $('preset').value = ''; p = { ...p, mode, ...extra }; buildFields(); rebuild(); }
   function updateChartTabs() {
     const spectrumTab = document.querySelector('[data-chart="spectrum"]');
     spectrumTab.hidden = p.mode !== 'arbitrary';
@@ -184,7 +190,9 @@
       }
       const bins = spectra.get(key);
       const nyquist = bins.at(-1)[0];
-      const upper = Number($('spectrumLimit').value);
+      const limit = $('spectrumLimit');
+      limit.max = nyquist;
+      const upper = Number(limit.value);
       xmax = Math.min(nyquist, Math.max(1 / p.duration, upper > 0 ? upper : Math.max(10, 5 * sys.d.fn)));
       let visible = bins.slice(0, Math.floor(xmax * p.duration) + 1);
       const useDecibels = $('spectrumScale').value === 'db';
@@ -217,8 +225,8 @@
     } else {
       const isPhase=chartType==='phaseFrequency', kind=$('freqKind').value, base=p.mode==='base', baseAcc=base&&p.baseInput==='acceleration';
       const name=kind==='transmission'?(base?'基础绝对位移/加速度传递率':'力传递率 |Fₜ|/F₀'):base?(baseAcc?'相对位移放大率 U/(Aᵍ/ωₙ²)':'绝对位移传递率 X/Y'):p.mode==='unbalance'?'不平衡位移比 X/(μe)':'位移放大系数 X/(F₀/k)';
-      $('chartTitle').textContent=(isPhase?'相频 · ':'幅频 · ')+name; xLabel='r = ω/ωₙ'; yLabel=isPhase?'滞后 / °':'幅值比'; xmin=0;xmax=4;
-      function freqSeries(params){return Array.from({length:1001},(_,i)=>{const r=i*.004,f=V.frequency(params,r,kind);return[r,isPhase?(f.phase===null?NaN:f.phase*180/Math.PI):f.gain];});}
+      $('chartTitle').textContent=(isPhase?'相频 · ':'幅频 · ')+name; xLabel='r = ω/ωₙ'; yLabel=isPhase?'滞后 / °':'幅值比'; xmin=0;xmax=Math.max(4,p.r,comparison?.p.r || 0);
+      function freqSeries(params){const ratios = Array.from({length:1001},(_,i)=>i*xmax/1000); ratios.push(1, params.r); return [...new Set(ratios)].sort((a,b)=>a-b).map(r=>{const f=V.frequency(params,r,kind);return[r,isPhase?(f.phase===null?NaN:f.phase*180/Math.PI):f.gain];});}
       series.push({pts:freqSeries(p),color:colors.teal});
       const comparable=comp&&comp.p.mode===p.mode&&(p.mode!=='base'||comp.p.baseInput===p.baseInput);
       if(comparable)series.push({pts:freqSeries(comp.p),color:colors.blue,dashed:true});
@@ -228,7 +236,7 @@
       marker=Number.isFinite(value)&&value<=ymax?[p.r,value]:null;
       $('legend').innerHTML='<span>单位谐波频响</span>'+(comparable?'<span class="blue">保留对照</span>':'');
       $('chartNote').textContent='当前幅值比 '+fmt(f.gain,3)+'；滞后 '+(f.phase===null?'无定义':fmt(f.phase*180/Math.PI,1)+'°')+'。'+(p.mode==='periodic'?'此图为单一谐波的系统频响。':'')+(baseAcc?(kind==='transmission'?'绝对加速度相位以基础加速度 ÿ 为基准。':'相对响应相位以等效惯性力 −mÿ 为基准。'):'')+(!isPhase?'超出纵轴上限 '+fmt(ymax,1)+' 的峰值不显示。':'')+'无阻尼 r=1 为奇点。';
-      if(!isPhase&&(base||kind==='transmission'))series.push({pts:[[0,1],[4,1]],color:'#aab6aa',dashed:true});
+      if(!isPhase&&(base||kind==='transmission'))series.push({pts:[[0,1],[xmax,1]],color:'#aab6aa',dashed:true});
     }
     const xp = x => box.l + (x - xmin) / (xmax - xmin) * pw, yp = y => box.t + ph - (y - ymin) / (ymax - ymin) * ph;
     const tick = n => Math.abs(n) >= 1000 || (Math.abs(n) > 0 && Math.abs(n) < .001) ? n.toExponential(1) : Number(n.toPrecision(3)).toString();
@@ -265,7 +273,13 @@
   $('quantity').addEventListener('change', render);
   $('spectrumSignal').addEventListener('change', render);
   $('spectrumScale').addEventListener('change', render);
-  $('spectrumLimit').addEventListener('change', render);
+  $('spectrumLimit').addEventListener('change', event => {
+    const input = event.target;
+    if (Number.isFinite(input.valueAsNumber)) {
+      input.value = Math.max(Number(input.min), Math.min(Number(input.max), input.valueAsNumber));
+    }
+    render();
+  });
   $('freqKind').addEventListener('change',render);
   $('components').addEventListener('change',render);
   $('response').addEventListener('change',e=>{p.response=e.target.value;rebuild();});
@@ -273,20 +287,29 @@
   $('restart').addEventListener('click', () => { t = 0; setRunning(false); render(); });
   $('step').addEventListener('click', () => { setRunning(false); t = Math.min(p.duration, t + .02); render(); });
   $('scrub').addEventListener('input', e => { setRunning(false); t = Number(e.target.value); render(); });
-  $('resetParams').addEventListener('click', () => { p = { ...V.DEFAULTS, mode: p.mode }; buildFields(); rebuild(); });
+  function resetParameters() {
+    $('preset').value = '';
+    p = { ...V.DEFAULTS, mode: p.mode };
+    buildFields();
+    rebuild();
+  }
+  $('resetParams').addEventListener('click', resetParameters);
   $('compare').addEventListener('click', () => { comparison = { p: { ...p }, points: points.map(s => ({ ...s })) }; updateComparison(); render(); notify('已保留当前参数的完整曲线，试着改变一个参数'); });
   $('clearCompare').addEventListener('click', () => { comparison = null; updateComparison(); render(); });
   $('preset').addEventListener('change', e => {
     const presets = {
-      period: { mode: 'free', m: 2, k: 100, zeta: 0, x0: .08, v0: 0 }, critical: { mode: 'damped', zeta: 1, x0: .08, v0: 0 }, over: { mode: 'damped', zeta: 2, x0: .08, v0: 0 },
+      critical: { mode: 'damped', zeta: 1, x0: .08, v0: 0 }, over: { mode: 'damped', zeta: 2, x0: .08, v0: 0 },
       resonance: { mode: 'forced', zeta: 0, r: 1, x0: 0, v0: 0, F: 4, duration: 12 }, beats: { mode: 'forced', zeta: 0, r: .9, x0: 0, v0: 0, F: 4, duration: 20 }, rotor:{mode:'unbalance',mu:.1,eccentricity:.02,r:2,x0:0,v0:0}, harmonicResonance:{mode:'periodic',wave:'square',harmonics:9,r:1/3,zeta:0,x0:0,v0:0,duration:20}, stepLoad:{mode:'arbitrary',load:'step',delay:.5,x0:0,v0:0,zeta:0}, pulseLoad:{mode:'arbitrary',load:'halfSine',tau:.3,delay:.5,x0:0,v0:0}, impulseLoad:{mode:'arbitrary',load:'impulse',J:.4,delay:.5,x0:0,v0:0}, custom:{mode:'arbitrary',load:'csv',x0:0,v0:0}, isolation: { mode: 'base', zeta: .1, r: 3, Y: .02, x0: 0, v0: 0, duration: 12 }
     };
-    if (presets[e.target.value]) { p = { ...V.DEFAULTS, ...presets[e.target.value] }; buildFields(); rebuild(); notify('已载入课堂情景，点击开始实验'); }
-    e.target.value = '';
+    if (!e.target.value) { resetParameters(); return; }
+    p = { ...V.DEFAULTS, ...presets[e.target.value] };
+    buildFields();
+    rebuild();
+    notify('已载入实验预设，点击开始实验');
   });
   $('exportCSV').addEventListener('click', () => {
     const keys = ['t','x','v','a','u','uv','ua','y','yv','ya','force','effectiveForce','Ft','kinetic','potential','energy','dampingPower','inputPower','steadyX','steadyV','steadyA','transientX','transientV','transientA'];
-    const metadata = '# Vibration Lab v1.0.2; SI units; ' + JSON.stringify(p) + '\r\n';
+    const metadata = '# Vibration Lab v' + V.VERSION + '; SI units; ' + JSON.stringify(p) + '\r\n';
     const header = 't_s,x_m,v_m_s,a_m_s2,u_m,uv_m_s,ua_m_s2,y_m,yv_m_s,ya_m_s2,external_force_N,effective_force_N,transmitted_force_N,kinetic_J,potential_J,energy_J,damping_power_W,input_power_W,steady_x_m,steady_v_m_s,steady_a_m_s2,transient_x_m,transient_v_m_s,transient_a_m_s2';
     download('vibration-' + p.mode + '.csv', '\uFEFF' + metadata + header + '\r\n' + points.map(s => keys.map(k => s[k]===null?'':s[k].toPrecision(12)).join(',')).join('\r\n'), 'text/csv;charset=utf-8');
   });
@@ -301,16 +324,14 @@
   $('importLoad').addEventListener('click',()=>$('loadFile').click());
   $('loadFile').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>150000)throw Error('文件过大');const text=(await file.text()).replace(/^\uFEFF/,'');V.parseLoad(text);p.csv=text;buildFields();rebuild();$('loadFeedback').textContent='已载入 '+file.name;}catch(err){notify('时程载入失败：'+err.message);}finally{e.target.value='';}});
   $('sampleLoad').addEventListener('click',()=>download('load-example.csv','t_s,F_N\r\n0,0\r\n0.5,0\r\n1,4\r\n1.5,-2\r\n2,0\r\n12,0','text/csv;charset=utf-8'));
-  $('identify').addEventListener('click',()=>{try{const z=V.identify(Number($('peak1').value),Number($('peak2').value),Number($('peakTime').value),Number($('peakCycles').value));$('identifyResult').textContent='δ='+fmt(z.delta,4)+'，ζ='+fmt(z.zeta,4)+'，ωd='+fmt(z.wd,3)+' rad/s，ωₙ='+fmt(z.wn,3)+' rad/s';}catch(err){$('identifyResult').textContent=err.message;}});
   for (const [button, dialog] of [['helpBtn', 'helpDialog'], ['aboutBtn', 'aboutDialog']]) $(button).addEventListener('click', () => { setRunning(false); $(dialog).showModal(); });
   document.querySelectorAll('.close-dialog').forEach(b => b.addEventListener('click', () => b.closest('dialog').close()));
   document.querySelectorAll('dialog').forEach(d => d.addEventListener('click', e => { if (e.target === d) { const r = d.getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) d.close(); } }));
   document.addEventListener('visibilitychange', () => { if (document.hidden) setRunning(false); });
+  document.addEventListener('pause-single-lab', () => setRunning(false));
   window.addEventListener('resize', () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(render); });
   function loop(now) { if (running) { if (last) t = Math.min(p.duration, t + Math.min((now - last) / 1000, .1) * Number($('speed').value)); last = now; if (t >= p.duration) setRunning(false); render(); } requestAnimationFrame(loop); }
   buildFields(); rebuild();
-  const check = V.selfCheck(); $('checkStatus').textContent = check.pass ? '计算内核自检通过 · '+check.checks+' 项基准' : '计算自检异常，请停止使用';
-  $('selfCheckDetail').textContent = `启动自检：${check.checks} 项解析基准，最大位移绝对误差 ${check.maxError.toExponential(2)} m。完整独立数值测试见源码包的验证报告。`;
-  if (!check.pass) { $('play').disabled = true; notify('计算自检未通过，请检查文件完整性'); }
+  if (!V.selfCheck().pass) { $('play').disabled = true; notify('计算自检未通过，请检查文件完整性'); }
   requestAnimationFrame(loop);
 })();

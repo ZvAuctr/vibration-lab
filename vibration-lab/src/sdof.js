@@ -7,10 +7,10 @@
   else root.SDOF = factory(root.Vibration);
 })(typeof globalThis !== 'undefined' ? globalThis : this, function(Core) {
   'use strict';
-  const VERSION = '1.0.2', { expm, mv } = Core.matrix;
+  const VERSION = '1.2.5', { expm, mv } = Core.matrix;
   const MODES = ['free', 'damped', 'forced', 'unbalance', 'base', 'periodic', 'arbitrary'];
   const DEFAULTS = { ...Core.DEFAULTS, phi: 0, mu: .1, eccentricity: .02, wave: 'square', harmonics: 9, load: 'step', tau: .4, delay: .5, J: .4, response: 'full', baseInput: 'displacement', Ag: 1, csv: '0,0\n0.5,0\n1,4\n1.5,-2\n2,0\n12,0' };
-  const LIMITS = { ...Core.LIMITS, phi: [-180, 180], mu: [0, .5], eccentricity: [0, .1], harmonics: [1, 21], tau: [.02, 20], delay: [0, 20], J: [-5, 5], Ag: [0, 10] };
+  const LIMITS = { ...Core.LIMITS, phi: [-36000, 36000], mu: [0, 1], eccentricity: [0, 20], harmonics: [1, 1010], tau: [.005, 600], delay: [0, 600], J: [-3000, 3000], Ag: [0, 2000] };
   function parseLoad(text) {
     if (typeof text !== 'string' || text.length > 150000) throw Error('时程文本过大');
     const rows = text.trim().split(/\r?\n/).filter(s => s.trim() && !s.trim().startsWith('#'));
@@ -20,7 +20,7 @@
       const values = row.trim().split(/[,;\s]+/);
       if (values.length !== 2) throw Error('第 ' + (i + 1) + ' 行需要两列：时间(s)、力(N)');
       const [t, F] = values.map(Number);
-      if (!Number.isFinite(t) || !Number.isFinite(F) || t < 0 || t > 60 || Math.abs(F) > 100000) throw Error('时程时间范围 0–60 s，力范围 ±100000 N');
+      if (!Number.isFinite(t) || !Number.isFinite(F) || t < 0 || t > LIMITS.duration[1] || Math.abs(F) > 10000000) throw Error('时程时间范围 0–1200 s，力范围 ±10000000 N');
       return [t, F];
     });
     if (pairs[0][0] !== 0) throw Error('时程第一行时间须为 0');
@@ -81,7 +81,7 @@
     return { A, initial: [0, 0, 0, 1], resonant, steady };
   }
   function loadSegments(p) {
-    const end = 60, start = p.delay, stop = Math.min(end, start + p.tau), list = [];
+    const end = LIMITS.duration[1], start = p.delay, stop = Math.min(end, start + p.tau), list = [];
     const push = (t0, t1, f0, slope = 0) => { if (t1 > t0) list.push({ t0, t1, f0, slope }); };
     if (p.load === 'csv') {
       const rows = parseLoad(p.csv);
@@ -159,7 +159,7 @@
         transientX: ss ? full[0] + (baseAcc ? g.y : 0) - sx : null, transientV: ss ? full[1] + (baseAcc ? g.yv : 0) - sv : null, transientA: ss ? fullA - sa : null };
     }
     function at(t) {
-      if (!Number.isFinite(t) || t < 0 || t > 60) throw Error('时间应在 0–60 s');
+      if (!Number.isFinite(t) || t < 0 || t > LIMITS.duration[1]) throw Error('时间应在 0–1200 s');
       let state;
       if (arbitrary) { const seg = findSegment(t); state = mv(expm(P, Math.max(0, t - seg.t0)), seg.state); }
       else { state = mv(expm(H, t), initial); for (const h of parts) { const s = mv(expm(h.A, t), h.initial); state[0] += s[0]; state[1] += s[1]; } }
